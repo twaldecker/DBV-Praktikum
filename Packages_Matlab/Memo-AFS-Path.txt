@@ -1,0 +1,2 @@
+Domäne: PRIV
+Y:\ = \afs\cs.hm.edu\share\lrolab
