@@ -1,4 +1,4 @@
-%Aufgabe 1a
+% Aufgabe 1a
 
 % 1. Dies ist ein Kommentar
 
@@ -50,8 +50,8 @@ size([1,2,3])
 
 %% 16. Dimensionen einer Matrix [1,2,3]
 ndims([1,2,3])
-% Ergebnis: 2 Auffälligkeit: Hat nichts mit der Dimension zu tun, ist die
-% anzahl von Dimensionen.
+% ndims gibt die Anzahl der Dimensionen zurück
+% size die Größe der einzelnen Dimensionen
 
 %% 17. Aneinanderhängen 2er Strings
 a='123';

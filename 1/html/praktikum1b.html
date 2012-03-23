@@ -1,0 +1,112 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>praktikum1b</title><meta name="generator" content="MATLAB 7.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-23"><meta name="DC.source" content="praktikum1b.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">1. Bild einlesen</a></li><li><a href="#3">2. Bild abspeichern</a></li><li><a href="#4">3. Bildinformationen ermitteln</a></li><li><a href="#5">4. als JPEG-Datei speichern</a></li><li><a href="#6">5. Farbkan&auml;le auftrennen</a></li><li><a href="#7">6. Zeile als Grauwertfunktion darstellen</a></li><li><a href="#8">7. Zeile im Bild markieren</a></li></ul></div><pre class="codeinput"><span class="comment">% Aufgabe 1b</span>
+</pre><h2>1. Bild einlesen<a name="2"></a></h2><pre class="codeinput">I = imread(<span class="string">'../allg/Bilder/peppers.png'</span>);
+</pre><h2>2. Bild abspeichern<a name="3"></a></h2><pre class="codeinput">imwrite(I,<span class="string">'../allg/Bilder/peppers.png'</span>);
+</pre><h2>3. Bildinformationen ermitteln<a name="4"></a></h2><pre class="codeinput">imageinfo(<span class="string">'../allg/Bilder/peppers.png'</span>)
+</pre><img vspace="5" hspace="5" src="praktikum1b_01.png" alt=""> <h2>4. als JPEG-Datei speichern<a name="5"></a></h2><pre class="codeinput">imwrite(I,<span class="string">'../allg/Bilder/peppers.jpg'</span>,<span class="string">'jpg'</span>);
+</pre><h2>5. Farbkan&auml;le auftrennen<a name="6"></a></h2><pre class="codeinput">R = I(:,:,1);
+G = I(:,:,2);
+B = I(:,:,3);
+</pre><h2>6. Zeile als Grauwertfunktion darstellen<a name="7"></a></h2><pre class="codeinput">figure, plot(R(150,:));
+</pre><img vspace="5" hspace="5" src="praktikum1b_02.png" alt=""> <h2>7. Zeile im Bild markieren<a name="8"></a></h2><pre class="codeinput">figure, imshow(I);
+hold <span class="string">on</span>;
+x = 1:size(I,2);
+y = 150;
+plot(x,y,<span class="string">'-'</span>);
+</pre><img vspace="5" hspace="5" src="praktikum1b_03.png" alt=""> <p class="footer"><br>
+      Published with MATLAB&reg; 7.13<br></p></div><!--
+##### SOURCE BEGIN #####
+% Aufgabe 1b
+
+%% 1. Bild einlesen
+I = imread('../allg/Bilder/peppers.png');
+
+%% 2. Bild abspeichern
+imwrite(I,'../allg/Bilder/peppers.png');
+
+%% 3. Bildinformationen ermitteln
+imageinfo('../allg/Bilder/peppers.png')
+
+%% 4. als JPEG-Datei speichern
+imwrite(I,'../allg/Bilder/peppers.jpg','jpg');
+
+%% 5. Farbkanäle auftrennen
+R = I(:,:,1);
+G = I(:,:,2);
+B = I(:,:,3);
+
+%% 6. Zeile als Grauwertfunktion darstellen
+figure, plot(R(150,:));
+
+%% 7. Zeile im Bild markieren
+figure, imshow(I);
+hold on;
+x = 1:size(I,2);
+y = 150;
+plot(x,y,'-');
+
+##### SOURCE END #####
+--></body></html>
