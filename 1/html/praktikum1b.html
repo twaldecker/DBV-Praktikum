@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>praktikum1b</title><meta name="generator" content="MATLAB 7.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-23"><meta name="DC.source" content="praktikum1b.m"><style type="text/css">
+      --><title>praktikum1b</title><meta name="generator" content="MATLAB 7.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-03-27"><meta name="DC.source" content="praktikum1b.m"><style type="text/css">
 
 body {
   background-color: white;
@@ -70,7 +70,8 @@ p.footer {
 </pre><h2>5. Farbkan&auml;le auftrennen<a name="6"></a></h2><pre class="codeinput">R = I(:,:,1);
 G = I(:,:,2);
 B = I(:,:,3);
-</pre><h2>6. Zeile als Grauwertfunktion darstellen<a name="7"></a></h2><pre class="codeinput">figure, plot(R(150,:));
+</pre><h2>6. Zeile als Grauwertfunktion darstellen<a name="7"></a></h2><pre class="codeinput">Gr = rgb2gray(I);
+figure, plot(Gr(150,:));
 </pre><img vspace="5" hspace="5" src="praktikum1b_02.png" alt=""> <h2>7. Zeile im Bild markieren<a name="8"></a></h2><pre class="codeinput">figure, imshow(I);
 hold <span class="string">on</span>;
 x = 1:size(I,2);
@@ -99,7 +100,8 @@ G = I(:,:,2);
 B = I(:,:,3);
 
 %% 6. Zeile als Grauwertfunktion darstellen
-figure, plot(R(150,:));
+Gr = rgb2gray(I);
+figure, plot(Gr(150,:));
 
 %% 7. Zeile im Bild markieren
 figure, imshow(I);

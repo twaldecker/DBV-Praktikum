@@ -18,7 +18,8 @@ G = I(:,:,2);
 B = I(:,:,3);
 
 %% 6. Zeile als Grauwertfunktion darstellen
-figure, plot(R(150,:));
+Gr = rgb2gray(I);
+figure, plot(Gr(150,:));
 
 %% 7. Zeile im Bild markieren
 figure, imshow(I);
