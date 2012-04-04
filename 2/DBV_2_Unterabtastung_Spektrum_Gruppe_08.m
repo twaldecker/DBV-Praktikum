@@ -46,8 +46,8 @@ figure, imshow(p3);
 
 % Kommentieren Sie die Ergebnisse:
 % A: Moiré deutlich stärker bei den verkleinerten Bildern. Bei den
-% verkleinerten Bildern wandern die Moiré auch in die höheren Bereiche mit
-% kleinerer Frequenz.
+% verkleinerten Bildern wandern die Moiré auch in die oberen Bereiche mit
+% höheren Frequenz.
 
 %% Speichern Sie die Bilder in Ergebnisse/ ab:
 imwrite(p1, 'Ergebnisse/Linien-unterabtastung-10Grad-400.pgm');
