@@ -1,0 +1,244 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>DBV_1b_IP_Toolbox_Gruppe_08</title><meta name="generator" content="MATLAB 7.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-04-04"><meta name="DC.source" content="DBV_1b_IP_Toolbox_Gruppe_08.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Initialisierung:</a></li><li><a href="#3">Lesen Sie das Bild 'peppers.png' ein und stellen Sie es dar:</a></li><li><a href="#4">Ermitteln Sie folgende Bildinformationen:</a></li><li><a href="#5">Speichern Sie das Bild als JPEG-Datei in Ergebnisse/ ab</a></li><li><a href="#6">Trennen sie das Bild in die einzelnen Farbkan&#65533;le (rot, gr&#65533;n, blau).</a></li><li><a href="#7">Was f&#65533;llt Ihnen auf bzgl. des Rot- und Blauanteils in den</a></li><li><a href="#8">Greifen Sie aus dem roten Teilbild die 100-te Zeile heraus und</a></li><li><a href="#9">Speichern Sie die Ergebnisse ab:</a></li></ul></div><pre class="codeinput"><span class="comment">%</span>
+<span class="comment">% 1b. Praktikum - Image Processing Toolbox</span>
+<span class="comment">% ---------------------------------------</span>
+<span class="comment">% Legen Sie in Ihrem Arbeitsverzeichnis ein Unterverzeichnis an:</span>
+<span class="comment">%    1b.IP-Toolbox</span>
+<span class="comment">%</span>
+<span class="comment">% Kopieren Sie das Notebook aus ../allg dorthin und benennen Sie es um in</span>
+<span class="comment">%    1b.IP-Toolbox_Gruppe-XY.m</span>
+<span class="comment">% Legen Sie dort ein Unterverzeichnis 'Ergebnisse/' an.</span>
+<span class="comment">%</span>
+<span class="comment">% F&#65533;hren Sie die Arbeitsschritte aus, an denen ??? als Platzhalter steht</span>
+<span class="comment">% und speichern Sie das Notebook am Ende ab (zwischendurch auch</span>
+<span class="comment">% Sicherungskopien).</span>
+<span class="comment">%</span>
+<span class="comment">% Die Aufgabenstellung sowie Hinweise finden Sie im</span>
+<span class="comment">%    1.DBV-Ex_Matlab+IPTB.pdf</span>
+<span class="comment">%</span>
+
+<span class="comment">% -------------------------------------------------------------------------</span>
+</pre><h2>Initialisierung:<a name="2"></a></h2><pre class="codeinput">coder = <span class="string">'Cinepak'</span>;    <span class="comment">%'None', 'Cinepak', 'Indeo3'</span>
+addpath(<span class="string">'../allg/'</span>);
+addpath(<span class="string">'../allg/Bilder/'</span>);
+addpath(<span class="string">'../Packages_Matlab/'</span>);
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><h2>Lesen Sie das Bild 'peppers.png' ein und stellen Sie es dar:<a name="3"></a></h2><pre class="codeinput">bild = imread(<span class="string">'peppers.png'</span>);
+figure, imshow(bild);
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><img vspace="5" hspace="5" src="DBV_1b_IP_Toolbox_Gruppe_08_01.png" alt=""> <h2>Ermitteln Sie folgende Bildinformationen:<a name="4"></a></h2><p>Zahl der Dimensionen:</p><pre class="codeinput">dim = ndims(bild)
+<span class="comment">% Bildgr&#65533;&#65533;e in den einzelnen Dimensionen:</span>
+[y,x,k] = size(bild)
+<span class="comment">% Datentyp des Bildes:</span>
+desc = whos(<span class="string">'bild'</span>);
+typ = desc.class
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><pre class="codeoutput">
+dim =
+
+     3
+
+
+y =
+
+   384
+
+
+x =
+
+   512
+
+
+k =
+
+     3
+
+
+typ =
+
+uint8
+
+</pre><h2>Speichern Sie das Bild als JPEG-Datei in Ergebnisse/ ab<a name="5"></a></h2><pre class="codeinput">imwrite(bild,<span class="string">'Ergebnisse/peppers.jpg'</span>,<span class="string">'jpg'</span>);
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><h2>Trennen sie das Bild in die einzelnen Farbkan&#65533;le (rot, gr&#65533;n, blau).<a name="6"></a></h2><pre>Stellen Sie diese dar und speichern Sie diese ebenfalls ab</pre><pre class="codeinput">bild_r = bild(:,:,1);
+bild_g = bild(:,:,2);
+bild_b = bild(:,:,3);
+
+figure, imshow(bild_r);
+figure, imshow(bild_g);
+figure, imshow(bild_b);
+
+imwrite(bild_r,<span class="string">'Ergebnisse/peppers_r.jpg'</span>,<span class="string">'jpg'</span>);
+imwrite(bild_g,<span class="string">'Ergebnisse/peppers_g.jpg'</span>,<span class="string">'jpg'</span>);
+imwrite(bild_b,<span class="string">'Ergebnisse/peppers_b.jpg'</span>,<span class="string">'jpg'</span>);
+</pre><img vspace="5" hspace="5" src="DBV_1b_IP_Toolbox_Gruppe_08_02.png" alt=""> <img vspace="5" hspace="5" src="DBV_1b_IP_Toolbox_Gruppe_08_03.png" alt=""> <img vspace="5" hspace="5" src="DBV_1b_IP_Toolbox_Gruppe_08_04.png" alt=""> <h2>Was f&#65533;llt Ihnen auf bzgl. des Rot- und Blauanteils in den<a name="7"></a></h2><pre>verschiedenen Bildern?</pre><pre class="codeinput"><span class="comment">%A: Der Rotanteil im Bild ist wesentlich h&ouml;her als der Blauanteil</span>
+<span class="comment">%   -&gt; Der rote Farbkanal weist h&ouml;here Werte auf (Grauwertbild ist heller)</span>
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><h2>Greifen Sie aus dem roten Teilbild die 100-te Zeile heraus und<a name="8"></a></h2><pre>stellen Sie sie als Funktion &#65533;ber der x-Koordinate dar;
+Markieren Sie diese Zeile geeignet im Rotkanalbild und stellen
+Sie dieses ebenfalls dar:</pre><pre class="codeinput">zeile_r = bild_r(100,:);
+figure, plot(zeile_r);
+bild_r2 = bild_r;
+bild_r2(100,:) = 0;
+figure, imshow(bild_r2);
+</pre><img vspace="5" hspace="5" src="DBV_1b_IP_Toolbox_Gruppe_08_05.png" alt=""> <img vspace="5" hspace="5" src="DBV_1b_IP_Toolbox_Gruppe_08_06.png" alt=""> <h2>Speichern Sie die Ergebnisse ab:<a name="9"></a></h2><pre class="codeinput"><span class="comment">%publish('DBV_1b_IP_Toolbox_Gruppe_08.m');</span>
+</pre><pre class="codeinput"><span class="string">'fertig'</span>
+</pre><pre class="codeoutput">
+ans =
+
+fertig
+
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.13<br></p></div><!--
+##### SOURCE BEGIN #####
+%
+% 1b. Praktikum - Image Processing Toolbox
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% Legen Sie in Ihrem Arbeitsverzeichnis ein Unterverzeichnis an:
+%    1b.IP-Toolbox
+%
+% Kopieren Sie das Notebook aus ../allg dorthin und benennen Sie es um in
+%    1b.IP-Toolbox_Gruppe-XY.m
+% Legen Sie dort ein Unterverzeichnis 'Ergebnisse/' an.
+%
+% F�hren Sie die Arbeitsschritte aus, an denen ??? als Platzhalter steht
+% und speichern Sie das Notebook am Ende ab (zwischendurch auch
+% Sicherungskopien).
+% 
+% Die Aufgabenstellung sowie Hinweise finden Sie im 
+%    1.DBV-Ex_Matlab+IPTB.pdf
+%
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+%% Initialisierung:
+coder = 'Cinepak';    %'None', 'Cinepak', 'Indeo3'
+addpath('../allg/');
+addpath('../allg/Bilder/');
+addpath('../Packages_Matlab/');
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Lesen Sie das Bild 'peppers.png' ein und stellen Sie es dar:
+bild = imread('peppers.png');
+figure, imshow(bild);
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Ermitteln Sie folgende Bildinformationen:
+% Zahl der Dimensionen:
+dim = ndims(bild)
+% Bildgr��e in den einzelnen Dimensionen:
+[y,x,k] = size(bild)
+% Datentyp des Bildes:
+desc = whos('bild');
+typ = desc.class
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Speichern Sie das Bild als JPEG-Datei in Ergebnisse/ ab
+imwrite(bild,'Ergebnisse/peppers.jpg','jpg');
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Trennen sie das Bild in die einzelnen Farbkan�le (rot, gr�n, blau).
+%  Stellen Sie diese dar und speichern Sie diese ebenfalls ab
+bild_r = bild(:,:,1);
+bild_g = bild(:,:,2);
+bild_b = bild(:,:,3);
+
+figure, imshow(bild_r);
+figure, imshow(bild_g);
+figure, imshow(bild_b);
+
+imwrite(bild_r,'Ergebnisse/peppers_r.jpg','jpg');
+imwrite(bild_g,'Ergebnisse/peppers_g.jpg','jpg');
+imwrite(bild_b,'Ergebnisse/peppers_b.jpg','jpg');
+
+%% Was f�llt Ihnen auf bzgl. des Rot- und Blauanteils in den
+%  verschiedenen Bildern?
+%A: Der Rotanteil im Bild ist wesentlich höher als der Blauanteil
+%   -> Der rote Farbkanal weist höhere Werte auf (Grauwertbild ist heller)
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Greifen Sie aus dem roten Teilbild die 100-te Zeile heraus und
+%  stellen Sie sie als Funktion �ber der x-Koordinate dar;
+%  Markieren Sie diese Zeile geeignet im Rotkanalbild und stellen 
+%  Sie dieses ebenfalls dar:
+zeile_r = bild_r(100,:);
+figure, plot(zeile_r);
+bild_r2 = bild_r;
+bild_r2(100,:) = 0;
+figure, imshow(bild_r2);
+
+%% Speichern Sie die Ergebnisse ab:
+%publish('DBV_1b_IP_Toolbox_Gruppe_08.m');
+
+%%
+'fertig'
+
+##### SOURCE END #####
+--></body></html>
