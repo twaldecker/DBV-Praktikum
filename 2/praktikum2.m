@@ -58,19 +58,26 @@ imwrite(p3, 'Ergebnisse/Linien-unterabtastung-10Grad-100.pgm');
 %% Fourier-Transformation:
 %  Erzeugen Sie ein 400x400-Bild vom Typ 'single' 
 %  mit einem weißen 200x200-Rechteck in der Mitte:
-
-
+a = zeros(400,400);
+a(101:300,101:300) = 1;
+figure, imshow(a, 'InitialMagnification','fit');
 
 % Erzeugen Sie ein 400x400-Bild vom Typ 'single'
-% mit einem wei�en 20x200-Recheck in der Mitte:
-%???
+% mit einem weißen 20x200-Recheck in der Mitte:
+b = zeros(400,400);
+b(101:300, 191:210)=1;
+figure, imshow(b, 'InitialMagnification','fit');
 
 %% Berechnen Sie die Betragsspektren der beiden Bilder:
-%???
+fa = fft2(a);
+fb = fft2(b);
 
 %% Stellen Sie die Betragsspektren dar, indem Sie die Spektren auf den 
 %  Maximalwert normieren und ggf. etwas aufhellen:
-%???
+afa = abs(fa);
+afb = abs(fb);
+figure, imshow(afa);
+figure, imshow(afb);
 
 %% Kommentieren Sie das Ergebnis:
 %A: ???
