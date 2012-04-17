@@ -96,15 +96,19 @@ figure, imshow(afb);
 %--------------------------------------------------------------------------
 %% Fourier-Transformation / Orientierung:
 %  Rotieren Sie das schmale Rechteck um 60 Grad:
-%???
+brot = imrotate(b,60,'bilinear');
+figure, imshow(brot);
 
 %% Berechnen Sie das Betragsspektrum des rotierten Bildes:
-%???
+fbrot = fftshift(fft2(brot));
+afbrot = abs(fbrot);
+afbrot = afbrot / max(max(afbrot)) * 255;
 
 %% Stellen Sie die Betragsspektren des urspr�nglichen und des rotierten
 %  Bildes dar, indem Sie die Spektren auf den Maximalwert normieren 
 %  und ggf. etwas aufhellen:
-%???
+figure, imshow(afb);
+figure, imshow(afbrot);
 
 %% Kommentieren Sie das Ergebnis:
 %A: ???
