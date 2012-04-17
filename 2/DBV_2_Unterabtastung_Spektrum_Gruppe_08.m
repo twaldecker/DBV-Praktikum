@@ -25,7 +25,7 @@ addpath('../allg/Bilder');
 %--------------------------------------------------------------------------
 %% Stellen Sie das Bild 'Linien-10Grad-800.pgm' dar:
 bild = imread('Linien-10Grad-800.pgm');
-figure, imshow(bild);
+% figure, imshow(bild);
 
 %--------------------------------------------------------------------------
 %% Unterabtastung: Verkleinern Sie das Bild jeweils um den Faktor 2:
@@ -34,15 +34,15 @@ figure, imshow(bild);
 
 %% Auflösung: 400x400 Bildpunkte:
 p1 = bild(1:2:end,1:2:end);
-figure, imshow(p1);
+% figure, imshow(p1);
 
 %% Auflösung: 200x200 Bildpunkte:
 p2 = p1(1:2:end,1:2:end);
-figure, imshow(p2);
+% figure, imshow(p2);
 
 %% Auflösung: 100x100 Bildpunkte:
 p3 = p2(1:2:end,1:2:end);
-figure, imshow(p3);
+% figure, imshow(p3);
 
 % Kommentieren Sie die Ergebnisse:
 % A: Moiré deutlich stärker bei den verkleinerten Bildern. Bei den
@@ -69,13 +69,15 @@ b(101:300, 191:210)=1;
 figure, imshow(b, 'InitialMagnification','fit');
 
 %% Berechnen Sie die Betragsspektren der beiden Bilder:
-fa = fft2(a);
-fb = fft2(b);
+fa = fftshift(fft2(a));
+fb = fftshift(fft2(b));
 
 %% Stellen Sie die Betragsspektren dar, indem Sie die Spektren auf den 
 %  Maximalwert normieren und ggf. etwas aufhellen:
 afa = abs(fa);
+afa = afa / max(max(afa)) * 255;
 afb = abs(fb);
+afb = afb / max(max(afb)) * 255;
 figure, imshow(afa);
 figure, imshow(afb);
 
