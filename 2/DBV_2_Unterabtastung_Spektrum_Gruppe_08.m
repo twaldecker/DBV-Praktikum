@@ -117,7 +117,8 @@ figure, imshow(afbrot);
 %A: ???
 
 %% Speichern Sie das rotierte Rechteck sowie dessen Spektrum in Ergebnisse/:
-%???
+imwrite(brot, 'Ergebnisse/Rechteck-rotiert-400.pgm');
+imwrite(afbrot, 'Ergebnisse/Rechteck-rotiert-Spektrum-400.pgm');
 
 %%
 'fertig'
