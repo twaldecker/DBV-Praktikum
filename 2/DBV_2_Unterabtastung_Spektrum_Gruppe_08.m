@@ -107,7 +107,7 @@ fbrot = fftshift(fft2(brot));
 afbrot = abs(fbrot);
 afbrot = afbrot / max(max(afbrot)) * 255;
 
-%% Stellen Sie die Betragsspektren des urspr�nglichen und des rotierten
+%% Stellen Sie die Betragsspektren des ursprünglichen und des rotierten
 %  Bildes dar, indem Sie die Spektren auf den Maximalwert normieren 
 %  und ggf. etwas aufhellen:
 figure, imshow(afb);
