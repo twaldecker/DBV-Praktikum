@@ -82,7 +82,13 @@ figure, imshow(afa);
 figure, imshow(afb);
 
 %% Kommentieren Sie das Ergebnis:
-%A: ???
+%A: Das erste Spektrum ergibt sich durch einfache überlegung jeder
+% Dimension einzeln und dann spätere zusammenfassung in ein graubild.
+% Das zweite Spektrum ist ähnlich wie das erste, in x-richtung sind aber
+% beim durchlaufen schneller die Wechsel von dunkel zu hell und umgekehrt,
+% wodurch sich höhere Frequenzen ergeben. Höhrere Frequenzen spiegeln sich
+% im Spektrum als höhere Werte wieder. Deshalb die größere Ausdehnung in
+% x-Richtung im Spektrum.
 
 %% Speichern Sie die Rechtecke sowie deren Spektren in Ergebnisse/:
 %???
