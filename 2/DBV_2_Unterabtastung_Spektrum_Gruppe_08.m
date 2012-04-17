@@ -91,7 +91,10 @@ figure, imshow(afb);
 % x-Richtung im Spektrum.
 
 %% Speichern Sie die Rechtecke sowie deren Spektren in Ergebnisse/:
-%???
+imwrite(a, 'Ergebnisse/Quadrat-400.pgm');
+imwrite(b, 'Ergebnisse/Rechteck-400.pgm');
+imwrite(afa, 'Ergebnisse/Quadrat-Spektrum-400.pgm');
+imwrite(afb, 'Ergebnisse/Rechteck-Spektrum-400.pgm');
 
 %--------------------------------------------------------------------------
 %% Fourier-Transformation / Orientierung:
