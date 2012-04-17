@@ -114,7 +114,8 @@ figure, imshow(afb);
 figure, imshow(afbrot);
 
 %% Kommentieren Sie das Ergebnis:
-%A: ???
+%A: Die Drehung im Ortsbereich wirkt sich direkt auf das Spektrum aus,
+%indem dieses ebenfalls um den gleichen Winkel rotiert wird.
 
 %% Speichern Sie das rotierte Rechteck sowie dessen Spektrum in Ergebnisse/:
 imwrite(brot, 'Ergebnisse/Rechteck-rotiert-400.pgm');
