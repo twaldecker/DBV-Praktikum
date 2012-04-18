@@ -25,7 +25,7 @@ addpath('../allg/Bilder');
 %--------------------------------------------------------------------------
 %% Stellen Sie das Bild 'Linien-10Grad-800.pgm' dar:
 bild = imread('Linien-10Grad-800.pgm');
-% figure, imshow(bild);
+figure, imshow(bild);
 
 %--------------------------------------------------------------------------
 %% Unterabtastung: Verkleinern Sie das Bild jeweils um den Faktor 2:
@@ -34,20 +34,22 @@ bild = imread('Linien-10Grad-800.pgm');
 
 %% Auflösung: 400x400 Bildpunkte:
 p1 = bild(1:2:end,1:2:end);
-% figure, imshow(p1);
+figure, imshow(p1);
 
 %% Auflösung: 200x200 Bildpunkte:
 p2 = p1(1:2:end,1:2:end);
-% figure, imshow(p2);
+figure, imshow(p2);
 
 %% Auflösung: 100x100 Bildpunkte:
 p3 = p2(1:2:end,1:2:end);
-% figure, imshow(p3);
+figure, imshow(p3);
 
 % Kommentieren Sie die Ergebnisse:
-% A: Moiré deutlich stärker bei den verkleinerten Bildern. Bei den
-% verkleinerten Bildern wandern die Moiré auch in die oberen Bereiche mit
-% höheren Frequenz.
+% A: Ein Moiré-Effekt (falsche, zusätzliche Strukturen im Bild) ist auf
+% allen Bildern zu erkennen. Bei den verkleinerten Bildern breiten sich
+% diese Bereiche auch in die oberen Bildbereiche mit niedrigeren
+% Ortsfrequenzen aus. Dieser Effekt ist auf die Unterabtastung
+% (Under-Sampling) zurückzuführen.
 
 %% Speichern Sie die Bilder in Ergebnisse/ ab:
 imwrite(p1, 'Ergebnisse/Linien-unterabtastung-10Grad-400.pgm');
@@ -82,7 +84,20 @@ figure, imshow(afa);
 figure, imshow(afb);
 
 %% Kommentieren Sie das Ergebnis:
-%A: Das erste Spektrum ergibt sich durch einfache überlegung jeder
+%A: Das Spektrum des ersten Bilds (Quadrat) entspricht der sinc-Funktion
+% sowohl in x- als auch in y-Richtung. Das Quadrat stellt eine
+% Fensterfunktion im Originalbereich dar. Im Spektrum ist deshalb die
+% Draufsicht der entsprechenden sinc-Funktionen zu erkennen. Die hellen
+% Bereichen stellen dabei die positiven Amplituden die dunklen Bereiche
+% dazwischen die negativen Amplituden dar.
+
+% Das Spektrum des zweiten Bilds (Balken) ist dem ersten sehr ähnlich. Auch
+% hier handelt es sich um sinc-Funktionen. Da in x-Richtung die
+% Fensterfunktion schmäler ist (höhere Frequenz) wird aufgrund der
+% Ähnlichkeit der Fouriertransformationen die sinc-Funktion im Spektrum
+% breiter.
+
+% Das erste Spektrum ergibt sich durch einfache überlegung jeder
 % Dimension einzeln und dann spätere zusammenfassung in ein graubild.
 % Das zweite Spektrum ist ähnlich wie das erste, in x-richtung sind aber
 % beim durchlaufen schneller die Wechsel von dunkel zu hell und umgekehrt,
@@ -114,8 +129,8 @@ figure, imshow(afb);
 figure, imshow(afbrot);
 
 %% Kommentieren Sie das Ergebnis:
-%A: Die Drehung im Ortsbereich wirkt sich direkt auf das Spektrum aus,
-%indem dieses ebenfalls um den gleichen Winkel rotiert wird.
+%A: Die Drehung im Ortsbereich wirkt sich direkt auf das Spektrum aus.
+% Dieses wird ebenfalls um den selben Winkel rotiert.
 
 %% Speichern Sie das rotierte Rechteck sowie dessen Spektrum in Ergebnisse/:
 imwrite(brot, 'Ergebnisse/Rechteck-rotiert-400.pgm');
