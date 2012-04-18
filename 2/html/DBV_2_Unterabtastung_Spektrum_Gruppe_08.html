@@ -1,0 +1,303 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>DBV_2_Unterabtastung_Spektrum_Gruppe_08</title><meta name="generator" content="MATLAB 7.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-04-18"><meta name="DC.source" content="DBV_2_Unterabtastung_Spektrum_Gruppe_08.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Initialisierung:</a></li><li><a href="#3">Stellen Sie das Bild 'Linien-10Grad-800.pgm' dar:</a></li><li><a href="#4">Unterabtastung: Verkleinern Sie das Bild jeweils um den Faktor 2:</a></li><li><a href="#5">Aufl&ouml;sung: 400x400 Bildpunkte:</a></li><li><a href="#6">Aufl&ouml;sung: 200x200 Bildpunkte:</a></li><li><a href="#7">Aufl&ouml;sung: 100x100 Bildpunkte:</a></li><li><a href="#8">Speichern Sie die Bilder in Ergebnisse/ ab:</a></li><li><a href="#9">Fourier-Transformation:</a></li><li><a href="#10">Berechnen Sie die Betragsspektren der beiden Bilder:</a></li><li><a href="#11">Stellen Sie die Betragsspektren dar, indem Sie die Spektren auf den</a></li><li><a href="#12">Kommentieren Sie das Ergebnis:</a></li><li><a href="#13">Speichern Sie die Rechtecke sowie deren Spektren in Ergebnisse/:</a></li><li><a href="#14">Fourier-Transformation / Orientierung:</a></li><li><a href="#15">Berechnen Sie das Betragsspektrum des rotierten Bildes:</a></li><li><a href="#16">Stellen Sie die Betragsspektren des urspr&uuml;nglichen und des rotierten</a></li><li><a href="#17">Kommentieren Sie das Ergebnis:</a></li><li><a href="#18">Speichern Sie das rotierte Rechteck sowie dessen Spektrum in Ergebnisse/:</a></li></ul></div><pre class="codeinput"><span class="comment">%</span>
+<span class="comment">% 2. Praktikum - Unterabtastung + Spektrum</span>
+<span class="comment">% ----------------------------------------</span>
+<span class="comment">% Legen Sie in Ihrem Arbeitsverzeichnis ein Unterverzeichnis an:</span>
+<span class="comment">%    2.Unterabtastung+Spektrum</span>
+<span class="comment">%</span>
+<span class="comment">% Kopieren Sie das Notebook aus ../allg dorthin und benennen Sie es um in</span>
+<span class="comment">%    2.Unterabtastung+Spektrum_Gruppe-XY.m</span>
+<span class="comment">% Legen Sie dort ein Unterverzeichnis 'Ergebnisse/' an.</span>
+<span class="comment">%</span>
+<span class="comment">% F&#65533;hren Sie die Arbeitsschritte aus, an denen ??? als Platzhalter steht</span>
+<span class="comment">% und speichern Sie das Notebook am Ende ab (zwischendurch auch</span>
+<span class="comment">% Sicherungskopien).</span>
+<span class="comment">%</span>
+<span class="comment">% Die Aufgabenstellung sowie Hinweise finden Sie im</span>
+<span class="comment">%    2.DBV-Ex_Unterabtastung+Spektrum.pdf</span>
+
+<span class="comment">% ------------------------------------------------------------------------</span>
+</pre><h2>Initialisierung:<a name="2"></a></h2><pre class="codeinput">coder = <span class="string">'Cinepak'</span>;    <span class="comment">%'None', 'Cinepak', 'Indeo3'</span>
+addpath(<span class="string">'../Packages_Matlab'</span>);
+addpath(<span class="string">'../allg/'</span>);
+addpath(<span class="string">'../allg/Bilder'</span>);
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><h2>Stellen Sie das Bild 'Linien-10Grad-800.pgm' dar:<a name="3"></a></h2><pre class="codeinput">bild = imread(<span class="string">'Linien-10Grad-800.pgm'</span>);
+figure, imshow(bild);
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><pre class="codeoutput">Warning: Image is too big to fit on screen; displaying at 67% 
+</pre><img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_01.png" alt=""> <h2>Unterabtastung: Verkleinern Sie das Bild jeweils um den Faktor 2:<a name="4"></a></h2><p>Greifen Sie dazu jede 2te Zeile und Spalte heraus, um die folgenden Aufl&ouml;sungen zu erhalten. Stellen Sie die Bilder jeweils dar:</p><h2>Aufl&ouml;sung: 400x400 Bildpunkte:<a name="5"></a></h2><pre class="codeinput">p1 = bild(1:2:end,1:2:end);
+figure, imshow(p1);
+</pre><img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_02.png" alt=""> <h2>Aufl&ouml;sung: 200x200 Bildpunkte:<a name="6"></a></h2><pre class="codeinput">p2 = p1(1:2:end,1:2:end);
+figure, imshow(p2);
+</pre><img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_03.png" alt=""> <h2>Aufl&ouml;sung: 100x100 Bildpunkte:<a name="7"></a></h2><pre class="codeinput">p3 = p2(1:2:end,1:2:end);
+figure, imshow(p3);
+
+<span class="comment">% Kommentieren Sie die Ergebnisse:</span>
+<span class="comment">% A: Ein Moir&eacute;-Effekt (falsche/zus&auml;tzliche Strukturen im Bild) ist auf</span>
+<span class="comment">% allen Bildern zu erkennen. Bei den verkleinerten Bildern breiten sich</span>
+<span class="comment">% diese fehlerhaften Bereiche auch in die oberen Bildbereiche mit</span>
+<span class="comment">% niedrigeren  Ortsfrequenzen aus. Dieser Effekt ist auf die Unterabtastung</span>
+<span class="comment">% (Under-Sampling) zur&uuml;ckzuf&uuml;hren.</span>
+</pre><img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_04.png" alt=""> <h2>Speichern Sie die Bilder in Ergebnisse/ ab:<a name="8"></a></h2><pre class="codeinput">imwrite(p1, <span class="string">'Ergebnisse/Linien-unterabtastung-10Grad-400.pgm'</span>);
+imwrite(p2, <span class="string">'Ergebnisse/Linien-unterabtastung-10Grad-200.pgm'</span>);
+imwrite(p3, <span class="string">'Ergebnisse/Linien-unterabtastung-10Grad-100.pgm'</span>);
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><h2>Fourier-Transformation:<a name="9"></a></h2><pre>Erzeugen Sie ein 400x400-Bild vom Typ 'single'
+mit einem wei&szlig;en 200x200-Rechteck in der Mitte:</pre><pre class="codeinput">a = zeros(400,400);
+a(101:300,101:300) = 1;
+figure, imshow(a, <span class="string">'InitialMagnification'</span>,<span class="string">'fit'</span>);
+
+<span class="comment">% Erzeugen Sie ein 400x400-Bild vom Typ 'single'</span>
+<span class="comment">% mit einem wei&szlig;en 20x200-Recheck in der Mitte:</span>
+b = zeros(400,400);
+b(101:300, 191:210)=1;
+figure, imshow(b, <span class="string">'InitialMagnification'</span>,<span class="string">'fit'</span>);
+</pre><img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_05.png" alt=""> <img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_06.png" alt=""> <h2>Berechnen Sie die Betragsspektren der beiden Bilder:<a name="10"></a></h2><pre class="codeinput">fa = fftshift(fft2(a));
+fb = fftshift(fft2(b));
+</pre><h2>Stellen Sie die Betragsspektren dar, indem Sie die Spektren auf den<a name="11"></a></h2><pre>Maximalwert normieren und ggf. etwas aufhellen:</pre><pre class="codeinput">afa = abs(fa);
+afa = afa / max(max(afa)) * 255;
+afb = abs(fb);
+afb = afb / max(max(afb)) * 255;
+figure, imshow(afa);
+figure, imshow(afb);
+</pre><img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_07.png" alt=""> <img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_08.png" alt=""> <h2>Kommentieren Sie das Ergebnis:<a name="12"></a></h2><pre class="codeinput"><span class="comment">%A: Das Spektrum des ersten Bilds (Quadrat) entspricht der sinc-Funktion</span>
+<span class="comment">% sowohl in x- als auch in y-Richtung (2D sinc). Das Quadrat stellt eine</span>
+<span class="comment">% Fensterfunktion im Originalbereich dar. Im Spektrum ist deshalb die</span>
+<span class="comment">% Draufsicht der entsprechenden sinc-Funktionen zu erkennen. Die hellen</span>
+<span class="comment">% Bereichen stellen dabei die positiven Amplituden die dunklen Bereiche</span>
+<span class="comment">% dazwischen die negativen Amplituden dar.</span>
+
+<span class="comment">% Das Spektrum des zweiten Bilds (Balken) ist dem ersten sehr &auml;hnlich. Auch</span>
+<span class="comment">% hier handelt es sich um sinc-Funktionen. Da in x-Richtung die</span>
+<span class="comment">% Fensterfunktion schm&auml;ler ist (h&ouml;here Frequenz) wird aufgrund der</span>
+<span class="comment">% &Auml;hnlichkeit der Fouriertransformationen die sinc-Funktion im Spektrum</span>
+<span class="comment">% breiter.</span>
+</pre><h2>Speichern Sie die Rechtecke sowie deren Spektren in Ergebnisse/:<a name="13"></a></h2><pre class="codeinput">imwrite(a, <span class="string">'Ergebnisse/Quadrat-400.pgm'</span>);
+imwrite(b, <span class="string">'Ergebnisse/Rechteck-400.pgm'</span>);
+imwrite(afa, <span class="string">'Ergebnisse/Quadrat-Spektrum-400.pgm'</span>);
+imwrite(afb, <span class="string">'Ergebnisse/Rechteck-Spektrum-400.pgm'</span>);
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><h2>Fourier-Transformation / Orientierung:<a name="14"></a></h2><pre>Rotieren Sie das schmale Rechteck um 60 Grad:</pre><pre class="codeinput">brot = imrotate(b,60,<span class="string">'bilinear'</span>);
+figure, imshow(brot);
+</pre><img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_09.png" alt=""> <h2>Berechnen Sie das Betragsspektrum des rotierten Bildes:<a name="15"></a></h2><pre class="codeinput">fbrot = fftshift(fft2(brot));
+afbrot = abs(fbrot);
+afbrot = afbrot / max(max(afbrot)) * 255;
+</pre><h2>Stellen Sie die Betragsspektren des urspr&uuml;nglichen und des rotierten<a name="16"></a></h2><pre>Bildes dar, indem Sie die Spektren auf den Maximalwert normieren
+und ggf. etwas aufhellen:</pre><pre class="codeinput">figure, imshow(afb);
+figure, imshow(afbrot);
+</pre><img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_10.png" alt=""> <img vspace="5" hspace="5" src="DBV_2_Unterabtastung_Spektrum_Gruppe_08_11.png" alt=""> <h2>Kommentieren Sie das Ergebnis:<a name="17"></a></h2><pre class="codeinput"><span class="comment">%A: Die Drehung im Ortsbereich wirkt sich direkt auf das Spektrum aus.</span>
+<span class="comment">% Dieses wird ebenfalls um den Winkel von 60&deg; rotiert.</span>
+</pre><h2>Speichern Sie das rotierte Rechteck sowie dessen Spektrum in Ergebnisse/:<a name="18"></a></h2><pre class="codeinput">imwrite(brot, <span class="string">'Ergebnisse/Rechteck-rotiert-400.pgm'</span>);
+imwrite(afbrot, <span class="string">'Ergebnisse/Rechteck-rotiert-Spektrum-400.pgm'</span>);
+</pre><pre class="codeinput"><span class="string">'fertig'</span>
+</pre><pre class="codeoutput">
+ans =
+
+fertig
+
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.13<br></p></div><!--
+##### SOURCE BEGIN #####
+%
+% 2. Praktikum - Unterabtastung + Spektrum
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Legen Sie in Ihrem Arbeitsverzeichnis ein Unterverzeichnis an:
+%    2.Unterabtastung+Spektrum
+%
+% Kopieren Sie das Notebook aus ../allg dorthin und benennen Sie es um in
+%    2.Unterabtastung+Spektrum_Gruppe-XY.m
+% Legen Sie dort ein Unterverzeichnis 'Ergebnisse/' an.
+%
+% F�hren Sie die Arbeitsschritte aus, an denen ??? als Platzhalter steht
+% und speichern Sie das Notebook am Ende ab (zwischendurch auch
+% Sicherungskopien).
+% 
+% Die Aufgabenstellung sowie Hinweise finden Sie im 
+%    2.DBV-Ex_Unterabtastung+Spektrum.pdf
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Initialisierung:
+coder = 'Cinepak';    %'None', 'Cinepak', 'Indeo3'
+addpath('../Packages_Matlab');
+addpath('../allg/');
+addpath('../allg/Bilder');
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Stellen Sie das Bild 'Linien-10Grad-800.pgm' dar:
+bild = imread('Linien-10Grad-800.pgm');
+figure, imshow(bild);
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Unterabtastung: Verkleinern Sie das Bild jeweils um den Faktor 2:
+% Greifen Sie dazu jede 2te Zeile und Spalte heraus, um die folgenden
+% Auflösungen zu erhalten. Stellen Sie die Bilder jeweils dar:
+
+%% Auflösung: 400x400 Bildpunkte:
+p1 = bild(1:2:end,1:2:end);
+figure, imshow(p1);
+
+%% Auflösung: 200x200 Bildpunkte:
+p2 = p1(1:2:end,1:2:end);
+figure, imshow(p2);
+
+%% Auflösung: 100x100 Bildpunkte:
+p3 = p2(1:2:end,1:2:end);
+figure, imshow(p3);
+
+% Kommentieren Sie die Ergebnisse:
+% A: Ein Moiré-Effekt (falsche/zusätzliche Strukturen im Bild) ist auf
+% allen Bildern zu erkennen. Bei den verkleinerten Bildern breiten sich
+% diese fehlerhaften Bereiche auch in die oberen Bildbereiche mit
+% niedrigeren  Ortsfrequenzen aus. Dieser Effekt ist auf die Unterabtastung
+% (Under-Sampling) zurückzuführen.
+
+%% Speichern Sie die Bilder in Ergebnisse/ ab:
+imwrite(p1, 'Ergebnisse/Linien-unterabtastung-10Grad-400.pgm');
+imwrite(p2, 'Ergebnisse/Linien-unterabtastung-10Grad-200.pgm');
+imwrite(p3, 'Ergebnisse/Linien-unterabtastung-10Grad-100.pgm');
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Fourier-Transformation:
+%  Erzeugen Sie ein 400x400-Bild vom Typ 'single' 
+%  mit einem weißen 200x200-Rechteck in der Mitte:
+a = zeros(400,400);
+a(101:300,101:300) = 1;
+figure, imshow(a, 'InitialMagnification','fit');
+
+% Erzeugen Sie ein 400x400-Bild vom Typ 'single'
+% mit einem weißen 20x200-Recheck in der Mitte:
+b = zeros(400,400);
+b(101:300, 191:210)=1;
+figure, imshow(b, 'InitialMagnification','fit');
+
+%% Berechnen Sie die Betragsspektren der beiden Bilder:
+fa = fftshift(fft2(a));
+fb = fftshift(fft2(b));
+
+%% Stellen Sie die Betragsspektren dar, indem Sie die Spektren auf den 
+%  Maximalwert normieren und ggf. etwas aufhellen:
+afa = abs(fa);
+afa = afa / max(max(afa)) * 255;
+afb = abs(fb);
+afb = afb / max(max(afb)) * 255;
+figure, imshow(afa);
+figure, imshow(afb);
+
+%% Kommentieren Sie das Ergebnis:
+%A: Das Spektrum des ersten Bilds (Quadrat) entspricht der sinc-Funktion
+% sowohl in x- als auch in y-Richtung (2D sinc). Das Quadrat stellt eine
+% Fensterfunktion im Originalbereich dar. Im Spektrum ist deshalb die
+% Draufsicht der entsprechenden sinc-Funktionen zu erkennen. Die hellen
+% Bereichen stellen dabei die positiven Amplituden die dunklen Bereiche
+% dazwischen die negativen Amplituden dar.
+
+% Das Spektrum des zweiten Bilds (Balken) ist dem ersten sehr ähnlich. Auch
+% hier handelt es sich um sinc-Funktionen. Da in x-Richtung die
+% Fensterfunktion schmäler ist (höhere Frequenz) wird aufgrund der
+% Ähnlichkeit der Fouriertransformationen die sinc-Funktion im Spektrum
+% breiter.
+
+%% Speichern Sie die Rechtecke sowie deren Spektren in Ergebnisse/:
+imwrite(a, 'Ergebnisse/Quadrat-400.pgm');
+imwrite(b, 'Ergebnisse/Rechteck-400.pgm');
+imwrite(afa, 'Ergebnisse/Quadrat-Spektrum-400.pgm');
+imwrite(afb, 'Ergebnisse/Rechteck-Spektrum-400.pgm');
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Fourier-Transformation / Orientierung:
+%  Rotieren Sie das schmale Rechteck um 60 Grad:
+brot = imrotate(b,60,'bilinear');
+figure, imshow(brot);
+
+%% Berechnen Sie das Betragsspektrum des rotierten Bildes:
+fbrot = fftshift(fft2(brot));
+afbrot = abs(fbrot);
+afbrot = afbrot / max(max(afbrot)) * 255;
+
+%% Stellen Sie die Betragsspektren des ursprünglichen und des rotierten
+%  Bildes dar, indem Sie die Spektren auf den Maximalwert normieren 
+%  und ggf. etwas aufhellen:
+figure, imshow(afb);
+figure, imshow(afbrot);
+
+%% Kommentieren Sie das Ergebnis:
+%A: Die Drehung im Ortsbereich wirkt sich direkt auf das Spektrum aus.
+% Dieses wird ebenfalls um den Winkel von 60° rotiert.
+
+%% Speichern Sie das rotierte Rechteck sowie dessen Spektrum in Ergebnisse/:
+imwrite(brot, 'Ergebnisse/Rechteck-rotiert-400.pgm');
+imwrite(afbrot, 'Ergebnisse/Rechteck-rotiert-Spektrum-400.pgm');
+
+%%
+'fertig'
+
+##### SOURCE END #####
+--></body></html>

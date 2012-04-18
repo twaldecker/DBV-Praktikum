@@ -45,10 +45,10 @@ p3 = p2(1:2:end,1:2:end);
 figure, imshow(p3);
 
 % Kommentieren Sie die Ergebnisse:
-% A: Ein Moiré-Effekt (falsche, zusätzliche Strukturen im Bild) ist auf
+% A: Ein Moiré-Effekt (falsche/zusätzliche Strukturen im Bild) ist auf
 % allen Bildern zu erkennen. Bei den verkleinerten Bildern breiten sich
-% diese Bereiche auch in die oberen Bildbereiche mit niedrigeren
-% Ortsfrequenzen aus. Dieser Effekt ist auf die Unterabtastung
+% diese fehlerhaften Bereiche auch in die oberen Bildbereiche mit
+% niedrigeren  Ortsfrequenzen aus. Dieser Effekt ist auf die Unterabtastung
 % (Under-Sampling) zurückzuführen.
 
 %% Speichern Sie die Bilder in Ergebnisse/ ab:
@@ -85,7 +85,7 @@ figure, imshow(afb);
 
 %% Kommentieren Sie das Ergebnis:
 %A: Das Spektrum des ersten Bilds (Quadrat) entspricht der sinc-Funktion
-% sowohl in x- als auch in y-Richtung. Das Quadrat stellt eine
+% sowohl in x- als auch in y-Richtung (2D sinc). Das Quadrat stellt eine
 % Fensterfunktion im Originalbereich dar. Im Spektrum ist deshalb die
 % Draufsicht der entsprechenden sinc-Funktionen zu erkennen. Die hellen
 % Bereichen stellen dabei die positiven Amplituden die dunklen Bereiche
@@ -96,14 +96,6 @@ figure, imshow(afb);
 % Fensterfunktion schmäler ist (höhere Frequenz) wird aufgrund der
 % Ähnlichkeit der Fouriertransformationen die sinc-Funktion im Spektrum
 % breiter.
-
-% Das erste Spektrum ergibt sich durch einfache überlegung jeder
-% Dimension einzeln und dann spätere zusammenfassung in ein graubild.
-% Das zweite Spektrum ist ähnlich wie das erste, in x-richtung sind aber
-% beim durchlaufen schneller die Wechsel von dunkel zu hell und umgekehrt,
-% wodurch sich höhere Frequenzen ergeben. Höhrere Frequenzen spiegeln sich
-% im Spektrum als höhere Werte wieder. Deshalb die größere Ausdehnung in
-% x-Richtung im Spektrum.
 
 %% Speichern Sie die Rechtecke sowie deren Spektren in Ergebnisse/:
 imwrite(a, 'Ergebnisse/Quadrat-400.pgm');
@@ -130,7 +122,7 @@ figure, imshow(afbrot);
 
 %% Kommentieren Sie das Ergebnis:
 %A: Die Drehung im Ortsbereich wirkt sich direkt auf das Spektrum aus.
-% Dieses wird ebenfalls um den selben Winkel rotiert.
+% Dieses wird ebenfalls um den Winkel von 60° rotiert.
 
 %% Speichern Sie das rotierte Rechteck sowie dessen Spektrum in Ergebnisse/:
 imwrite(brot, 'Ergebnisse/Rechteck-rotiert-400.pgm');
