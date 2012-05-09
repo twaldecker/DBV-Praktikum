@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{scrartcl}
+\documentclass[a4paper,11pt,oneside]{scrartcl}
 \parindent 0pt
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
@@ -14,49 +14,93 @@
 
 \newpage
 
-\section{Aufgabe 1: Fourier-Beziehungen}
-\subsection{1a) Verschiebung im Ortsbereich}
+\section*{Aufgabe 1: Fourier-Beziehungen}
+\subsection*{1a) Verschiebung im Ortsbereich}
 
 $\mathcal{F}\{f(x-\alpha,y-\beta)\}=\iint_{-\infty}^{\infty}f(x-\alpha,y-\beta)\cdot e^{-j2\pi(xu+yv)} dx dy$ \\
 
-mit den Substitutionen $\xi=x-\alpha$ ($x=\xi+\alpha$) und $\eta=y-\beta$ ($y=\eta+\beta$) ergibt sich \\
+Mit den Substitutionen $\xi=x-\alpha$ ($x=\xi+\alpha$) und $\eta=y-\beta$ ($y=\eta+\beta$) ergibt sich \\
 
 $=\iint_{-\infty}^{\infty}f(\xi,\eta)\cdot e^{-j2\pi((\xi+\alpha)u+(\eta+\beta)v)} d\xi d\eta$ \\
 
-durch Ausklammern der konstanten Faktoren erhält man \\
+Durch Ausklammern der konstanten Faktoren erhält man \\
 
 $=e^{-j2\pi(\alpha u+\beta v)}\iint_{-\infty}^{\infty}f(\xi,\eta)\cdot e^{-j2\pi(\xi u+\eta v)} d\xi d\eta$ \\
 
-da das Integral der Fouriertransformation $\mathcal{F}\{f(\xi,\eta)\}=F(u,v)$ entspricht folgt \\
+Da das Integral der Fouriertransformation $\mathcal{F}\{f(\xi,\eta)\}=F(u,v)$ entspricht folgt \\
 
 $\mathcal{F}\{f(x-\alpha,y-\beta)\}=F(u,v)\cdot e^{-j2\pi(\alpha u+\beta v)}$
 
-\subsection{1b) Faltungssatz}
+\subsection*{1b) Faltungssatz}
 
 $\mathcal{F}\{h(x,y)\ast f(x,y)\}=\iint_{-\infty}^{\infty}[\iint_{-\infty}^{\infty}h(\chi,\psi)\cdot f(x-\chi,y-\psi) d\chi d\psi]\cdot e^{-j2\pi(xu+yv)} dx dy$ \\
 
-durch Ausklammern und Umstellen der konstanten Faktoren erhält man \\
+Durch Ausklammern und Umstellen der konstanten Faktoren erhält man \\
 
 $=\iint_{-\infty}^{\infty}h(\chi,\psi)\cdot[\iint_{-\infty}^{\infty}f(x-\chi,y-\psi)\cdot e^{-j2\pi(xu+yv)} dx dy] d\chi d\psi$ \\
 
-da das innere Integral mit der Beziehung aus Teilaufgabe 1a) der Fouriertransformation $\mathcal{F}\{f(x-\chi,y-\psi)\}=F(u,v)\cdot e^{-j2\pi(\chi u+\psi v)}$ entspricht folgt \\
+Da das innere Integral mit der Beziehung aus Teilaufgabe 1a) der Fouriertransformation $\mathcal{F}\{f(x-\chi,y-\psi)\}=F(u,v)\cdot e^{-j2\pi(\chi u+\psi v)}$ entspricht folgt \\
 
 $=\iint_{-\infty}^{\infty}h(\chi,\psi)\cdot F(u,v)\cdot e^{-j2\pi(\chi u+\psi v)} d\chi d\psi$ \\
 
-durch Ausklammern des konstanten Faktor erhält man \\
+Durch Ausklammern des konstanten Faktor erhält man \\
 
 $=F(u,v)\iint_{-\infty}^{\infty}h(\chi,\psi)\cdot e^{-j2\pi(\chi u+\psi v)} d\chi d\psi$ \\
 
-da das Integral der Fouriertransformation $\mathcal{F}\{h(\chi,\psi)\}=H(u,v)$ entspricht folgt \\
+Da das Integral der Fouriertransformation $\mathcal{F}\{h(\chi,\psi)\}=H(u,v)$ entspricht folgt \\
 
 $\mathcal{F}\{h(x,y)\ast f(x,y)\}=F(u,v)\cdot H(u,v)$
 
 \newpage
 
-\section{Aufgabe 2: Approximation von sinc(x) durch kubischen Spline}
+\section*{Aufgabe 2: Approximation von sinc(x) durch kubischen Spline}
 
 \newpage
 
-\section{Aufgabe 3: DFT/Abtastung/Abtasttheorem}
+\section*{Aufgabe 3: DFT/Abtastung/Abtasttheorem}
+\subsection*{a)}
+
+$\Delta x=\frac{L}{N}=\frac{10\,mm}{256}=0.0391\,mm$
+
+\subsection*{b)}
+
+$u_{a}=\frac{N}{L}=\frac{256}{10\,mm}=25.6\,\frac{1}{mm}$
+
+\subsection*{c)}
+
+$\Delta u=\frac{1}{N\Delta x}=\frac{1}{256\cdot0.0391\,mm}= 0.1\,\frac{1}{mm}$
+
+\subsection*{d)}
+
+Die Schwingung $\sin(16\pi k)$ besitzt eine Kreisfrequenz von $\omega=16\pi\,\frac{1}{mm}$ mit $\omega=2\pi f$ also eine Frequenz von $f=\frac{16\pi}{2\pi}\,\frac{1}{mm}=8\,\frac{1}{mm}$. Zusammen mit dem Intervall $\Delta u$ aus Tailaufgabe c) ergeben sich \\
+
+$l_{1}=\frac{f}{\Delta u}=\frac{8\,\frac{1}{mm}}{0.1\,\frac{1}{mm}}=80$ und $l_{2}=256-80=176$
+
+\subsection*{e)}
+
+$f_{max}=\frac{u_{a}}{2}=12.8\,\frac{1}{mm}$
+
+\section{Aufgabe 2: Spline}
+
+\begin{displaymath}
+f(x) = 
+ \left\{ 
+  \begin{array}{l}
+   f_1(x) = a_1x^3 + b_1x^2 + c_1x + d_1\\
+   f_2(x) = a_2x^3 + b_2x^2 + c_2x + d_2\\
+   f_3(x) = 0\\
+  \end{array} 
+   \right.
+\end{displaymath}
+
+$f_1'(x) = 3a_1x^2 + 2b_1x + c_1 $\\
+$f_2'(x) = 3a_2x^2 + 2b_2x + c_2 $\\
+
+$f_1''(x) = 6a_1x + 2b_1$\\
+$f_2''(x) = 6a_2x + 2b_2$\\
+
+$f_1(0) = 1 = a_1 \cdot 0 + b_1 \cdot 0 + c_1 \cdot 0 + d_1 = d_1 = 1$\\
+$f_1'(0) = 0 = 3a_1 \cdot 0 + 2b_1 \cdot 0 + c_1 = c_1 = 0$\\
+
 
 \end{document}
