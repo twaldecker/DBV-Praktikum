@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.27)  9 MAY 2012 12:08
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.27)  9 MAY 2012 12:13
 entering extended mode
  %&-line parsing enabled.
 **DBV_3_Fourier_Splines_DFT_Gruppe_08.tex
@@ -494,32 +494,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 50--51
 
  []
 
-[2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 69--71
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--98
+Underfull \hbox (badness 10000) in paragraph at lines 72--74
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 99--101
+Underfull \hbox (badness 10000) in paragraph at lines 75--77
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 102--104
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
 
  []
 
 [4] (./DBV_3_Fourier_Splines_DFT_Gruppe_08.aux) ) 
 Here is how much of TeX's memory you used:
- 2238 strings out of 495021
- 29308 string characters out of 1181035
- 102307 words of memory out of 3000000
- 5435 multiletter control sequences out of 15000+50000
+ 2237 strings out of 495021
+ 29302 string characters out of 1181035
+ 101307 words of memory out of 3000000
+ 5434 multiletter control sequences out of 15000+50000
  12368 words of font info for 48 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  36i,7n,45p,312b,216s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -534,7 +534,7 @@ pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 
-Output written on DBV_3_Fourier_Splines_DFT_Gruppe_08.pdf (4 pages, 130049 byte
+Output written on DBV_3_Fourier_Splines_DFT_Gruppe_08.pdf (4 pages, 130130 byte
 s).
 PDF statistics:
  59 PDF objects out of 1000 (max. 8388607)

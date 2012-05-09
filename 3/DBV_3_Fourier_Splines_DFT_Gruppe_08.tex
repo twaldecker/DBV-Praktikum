@@ -55,6 +55,26 @@ $\mathcal{F}\{h(x,y)\ast f(x,y)\}=F(u,v)\cdot H(u,v)$
 
 \section*{Aufgabe 2: Approximation von sinc(x) durch kubischen Spline}
 
+\begin{displaymath}
+f(x) = 
+ \left\{ 
+  \begin{array}{l}
+   f_1(x) = a_1x^3 + b_1x^2 + c_1x + d_1\\
+   f_2(x) = a_2x^3 + b_2x^2 + c_2x + d_2\\
+   f_3(x) = 0\\
+  \end{array} 
+   \right.
+\end{displaymath}
+
+$f_1'(x) = 3a_1x^2 + 2b_1x + c_1 $\\
+$f_2'(x) = 3a_2x^2 + 2b_2x + c_2 $\\
+
+$f_1''(x) = 6a_1x + 2b_1$\\
+$f_2''(x) = 6a_2x + 2b_2$\\
+
+$f_1(0) = 1 = a_1 \cdot 0 + b_1 \cdot 0 + c_1 \cdot 0 + d_1 = d_1 = 1$\\
+$f_1'(0) = 0 = 3a_1 \cdot 0 + 2b_1 \cdot 0 + c_1 = c_1 = 0$\\
+
 \newpage
 
 \section*{Aufgabe 3: DFT/Abtastung/Abtasttheorem}
@@ -79,28 +99,5 @@ $l_{1}=\frac{f}{\Delta u}=\frac{8\,\frac{1}{mm}}{0.1\,\frac{1}{mm}}=80$ und $l_{
 \subsection*{e)}
 
 $f_{max}=\frac{u_{a}}{2}=12.8\,\frac{1}{mm}$
-
-\section{Aufgabe 2: Spline}
-
-\begin{displaymath}
-f(x) = 
- \left\{ 
-  \begin{array}{l}
-   f_1(x) = a_1x^3 + b_1x^2 + c_1x + d_1\\
-   f_2(x) = a_2x^3 + b_2x^2 + c_2x + d_2\\
-   f_3(x) = 0\\
-  \end{array} 
-   \right.
-\end{displaymath}
-
-$f_1'(x) = 3a_1x^2 + 2b_1x + c_1 $\\
-$f_2'(x) = 3a_2x^2 + 2b_2x + c_2 $\\
-
-$f_1''(x) = 6a_1x + 2b_1$\\
-$f_2''(x) = 6a_2x + 2b_2$\\
-
-$f_1(0) = 1 = a_1 \cdot 0 + b_1 \cdot 0 + c_1 \cdot 0 + d_1 = d_1 = 1$\\
-$f_1'(0) = 0 = 3a_1 \cdot 0 + 2b_1 \cdot 0 + c_1 = c_1 = 0$\\
-
 
 \end{document}
