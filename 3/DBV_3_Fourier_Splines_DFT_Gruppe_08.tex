@@ -56,7 +56,7 @@ $\mathcal{F}\{h(x,y)\ast f(x,y)\}=F(u,v)\cdot H(u,v)$
 \section*{Aufgabe 2: Approximation von sinc(x) durch kubischen Spline}
 
 Ansatz und Ableitungen:\\
-\begin{math}
+\begin{equation*}
 \begin{array}{ll}
 f(x) & = 
  \left\{ 
@@ -85,38 +85,68 @@ f''(x) & =
   \end{array}
  \right.
  \end{array}
-\end{math}\\
-$f_1(0) = 1 = a_1 \cdot 0 + b_1 \cdot 0 + c_1 \cdot 0 + d_1 \Rightarrow d_1 = 1$\\
-$f_1'(0) = 0 = 3a_1 \cdot 0 + 2b_1 \cdot 0 + c_1 \Rightarrow c_1 = 0$\\
+\end{equation*}\\
 
-I $f_1(1) = 0 = a_1 + b_1 + 1$\\
-II $f_2(1) = 0 = a_2 + b_2 + c_2 + d_2$\\
-III $f_2(2) = 0 = 8a_2 + 4b_2 + 2c_2 + d_2$\\
-IV $f_1'(1) = f_2'(1): 3a_1 + 2b_1 = 3a_2 + 2b_2 + c_2$\\
-V $f_2'(2) = 0 = 12a_2 + 4b_2 + c_2$\\
+Einsetzen der bekannten Werte der Funktion und der Ableitung an der Stelle 0 ergibt direkt Lösungen für $c_1$ und $d_1$:
+\begin{align*}
+&f_1(0) = 1 = a_1 \cdot 0 + b_1 \cdot 0 + c_1 \cdot 0 + d_1 \Rightarrow \underline{d_1 = 1}\\
+&f_1'(0) = 0 = 3a_1 \cdot 0 + 2b_1 \cdot 0 + c_1 \Rightarrow \underline{c_1 = 0}
+\end{align*}
 
-I: $a_1 + b_1 = -1 \Rightarrow b_1 = -1 -a_1$\\
-V: $12a_2 + 4b_2 + c_2 = 0 \Rightarrow c_2 = -12a_2 - 4b_2$\\
-II: $a_2 + b_2 + c_2 + d_2 = 0 \Rightarrow d_2 = -a_2 - b_2 - c_2 \Rightarrow -a_2 - b_2 + 12a_2 +4b_2 = 11a_2 + 3b_2 = d_2$\\
-III: $8a_2 + 4b_2 + 2c_2 + d_2 = 0$\\
-$8a_2 + 4b_2 + 2(-12a_2 - 4b_2) + 11a_2 + 3b_2 = 0$\\
-$a_2(8-24+11) + b_2(4-8+3) = 0$\\
-$b_2 = -5a_2$\\
-V: $c_2 = -12a_2 - 4b_2$\\
-$c_2 = -12a_2 -4(-5a_2) = -12a_2 + 20a_2$\\
-$c_2 = 8a_2$\\
+Durch das Einsetzen der übrigen Funktions- und Ableitungswerte an den jeweiligen Grenzen der Splines ergeben sich fünf Gleichungen:
+\begin{align}
+f_1(1) = & 0 = a_1 + b_1 + 1\label{g1}\\
+f_2(1) = & 0 = a_2 + b_2 + c_2 + d_2\label{g2}\\
+f_2(2) = & 0 = 8a_2 + 4b_2 + 2c_2 + d_2\label{g3}\\
+f_1'(1) = & f_2'(1): 3a_1 + 2b_1 = 3a_2 + 2b_2 + c_2\label{g4}\\
+f_2'(2) = & 0 = 12a_2 + 4b_2 + c_2\label{g5}
+\end{align}
 
-II: $d_2 = 11a_2 + 3b_2 = 11a_2 + 3(-5a_2)$\\
-$d_2 = -4a_2$
+Zuerst wird $c_2$ mit Gleichung \eqref{g5} aus $a_2$ und $b_2$ ausgedrückt:
+\begin{equation*}12a_2 + 4b_2 + c_2 = 0 \Rightarrow \underline{c_2 = -12a_2 - 4b_2}\end{equation*}
 
+Dann wird $d_2$ mit Gleichung \eqref{g2} und dem Ausdruck von $c_2$ aus Gleichung \eqref{g5} auch durch $a_2$ und $b_2$ ausgedrückt:
+\begin{align*}
+&a_2 + b_2 + c_2 + d_2 = 0\\
+&d_2 = -a_2 - b_2 - c_2\\
+&d_2 = -a_2 - b_2 + 12a_2 +4b_2\\
+&\underline{d_2 = 11a_2 + 3b_2}
+\end{align*}
 
-IV: $3a_1 + 2b_1 = 3a_2 + 2b_2 + c_2$\\
-$3a_1 + 2(-1 -a_1) = 3a_2 + 2b_2 +c_2$\\
-$a_1 -2 = 3a_2 + 2b_2 +c_2$\\
+Mit Gleichung \eqref{g3} und den vorherigen Ausdrücken von $c_2$ und $d_2$ können wir $b_2$ als Funktion von $a_2$ darstellen:
+\begin{align*}
+&8a_2 + 4b_2 + 2c_2 + d_2 = 0\\
+&8a_2 + 4b_2 + 2(-12a_2 - 4b_2) + 11a_2 + 3b_2 = 0\\
+&a_2(8-24+11) + b_2(4-8+3) = 0\\
+&\underline{b_2 = -5a_2}
+\end{align*}
 
-I: $b_1 = -1 - a_1$\\
-$b_1 = -1 - (a_2 + 2)$\\
-$b_1 = -a_2 - 3$\\
+Durch Einsetzen dieses Ergebnisses in die aufgelösten Gleichungen \eqref{g2} und \eqref{g5} können wir dort das $b_2$ eliminieren:
+\begin{align*}
+&c_2 = -12a_2 - 4b_2\\
+&c_2 = -12a_2 -4(-5a_2) = -12a_2 + 20a_2\\
+&\underline{c_2 = 8a_2}\\[.3cm]
+&d_2 = 11a_2 + 3b_2 = 11a_2 + 3(-5a_2)\\
+&\underline{d_2 = -4a_2}
+\end{align*}
+
+Mit Gleichung \eqref{g1} wird nun $b_1$ aus $a_1$ ausgedrückt:
+\begin{equation*}a_1 + b_1 = -1 \Rightarrow \underline{b_1 = -1 -a_1}\end{equation*}
+
+Dies und die Ergebnisse für $b_2$, $c_2$ und $d_2$ werden nun in Gleichung \eqref{g4} eingesetzt:
+\begin{align*}
+&3a_1 + 2b_1 = 3a_2 + 2b_2 + c_2\\
+&3a_1 + 2(-1 -a_1) = 3a_2 + 2(-5a_2) + 8a_2\\
+&a_1 -2 = 3a_2 - 10a_2 + 8a_2\\
+&\underline{a_1 = a_2 + 2}
+\end{align*}
+
+Das Ergebins in \eqref{g1} eingesetzt ergibt den Ausdruck für $b_1$:
+\begin{align*}
+&b_1 = -1 - a_1\\
+&b_1 = -1 - (a_2 + 2)\\
+&b_1 = -a_2 - 3\\
+\end{align*}
 \newpage
 
 \section*{Aufgabe 3: DFT/Abtastung/Abtasttheorem}
