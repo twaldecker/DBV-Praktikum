@@ -1,22 +1,59 @@
-\documentclass[a4paper,10pt]{scrartcl}
+\documentclass[a4paper,11pt,oneside]{scrartcl}
+\parindent 0pt
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{amssymb}
 
 %opening
 \title{Digitale Bildverarbeitung - Lösung Blatt 3 (Fourier-Transf., Splines, DFT)}
-\author{Thomas Waldecker\\
-	Stefan Giggenbach}
+\author{Thomas Waldecker\\Stefan Giggenbach}
 
 \begin{document}
 
 \maketitle
 
-\section{Aufgabe 1: Fourier-Beziehungen}
-\subsection{1a) Verschiebung im Ortsbereich}
+\newpage
 
-$\{f(x-\alpha,y-\beta)\}=\iint_{1}^{5}{f(x-\alpha,y-\beta)\cdot e^{-j2\pi(xu+yv)}}$
+\section*{Aufgabe 1: Fourier-Beziehungen}
+\subsection*{1a) Verschiebung im Ortsbereich}
 
-\section{Aufgabe 2: Spline}
+$\mathcal{F}\{f(x-\alpha,y-\beta)\}=\iint_{-\infty}^{\infty}f(x-\alpha,y-\beta)\cdot e^{-j2\pi(xu+yv)} dx dy$ \\
+
+Mit den Substitutionen $\xi=x-\alpha$ ($x=\xi+\alpha$) und $\eta=y-\beta$ ($y=\eta+\beta$) ergibt sich \\
+
+$=\iint_{-\infty}^{\infty}f(\xi,\eta)\cdot e^{-j2\pi((\xi+\alpha)u+(\eta+\beta)v)} d\xi d\eta$ \\
+
+Durch Ausklammern der konstanten Faktoren erhält man \\
+
+$=e^{-j2\pi(\alpha u+\beta v)}\iint_{-\infty}^{\infty}f(\xi,\eta)\cdot e^{-j2\pi(\xi u+\eta v)} d\xi d\eta$ \\
+
+Da das Integral der Fouriertransformation $\mathcal{F}\{f(\xi,\eta)\}=F(u,v)$ entspricht folgt \\
+
+$\mathcal{F}\{f(x-\alpha,y-\beta)\}=F(u,v)\cdot e^{-j2\pi(\alpha u+\beta v)}$
+
+\subsection*{1b) Faltungssatz}
+
+$\mathcal{F}\{h(x,y)\ast f(x,y)\}=\iint_{-\infty}^{\infty}[\iint_{-\infty}^{\infty}h(\chi,\psi)\cdot f(x-\chi,y-\psi) d\chi d\psi]\cdot e^{-j2\pi(xu+yv)} dx dy$ \\
+
+Durch Ausklammern und Umstellen der konstanten Faktoren erhält man \\
+
+$=\iint_{-\infty}^{\infty}h(\chi,\psi)\cdot[\iint_{-\infty}^{\infty}f(x-\chi,y-\psi)\cdot e^{-j2\pi(xu+yv)} dx dy] d\chi d\psi$ \\
+
+Da das innere Integral mit der Beziehung aus Teilaufgabe 1a) der Fouriertransformation $\mathcal{F}\{f(x-\chi,y-\psi)\}=F(u,v)\cdot e^{-j2\pi(\chi u+\psi v)}$ entspricht folgt \\
+
+$=\iint_{-\infty}^{\infty}h(\chi,\psi)\cdot F(u,v)\cdot e^{-j2\pi(\chi u+\psi v)} d\chi d\psi$ \\
+
+Durch Ausklammern des konstanten Faktor erhält man \\
+
+$=F(u,v)\iint_{-\infty}^{\infty}h(\chi,\psi)\cdot e^{-j2\pi(\chi u+\psi v)} d\chi d\psi$ \\
+
+Da das Integral der Fouriertransformation $\mathcal{F}\{h(\chi,\psi)\}=H(u,v)$ entspricht folgt \\
+
+$\mathcal{F}\{h(x,y)\ast f(x,y)\}=F(u,v)\cdot H(u,v)$
+
+\newpage
+
+\section*{Aufgabe 2: Approximation von sinc(x) durch kubischen Spline}
 
 \begin{math}
 \begin{array}{ll}
@@ -52,5 +89,29 @@ f''(x) & =
 $f_1(0) = 1 = a_1 \cdot 0 + b_1 \cdot 0 + c_1 \cdot 0 + d_1 = d_1 = 1$\\
 $f_1'(0) = 0 = 3a_1 \cdot 0 + 2b_1 \cdot 0 + c_1 = c_1 = 0$\\
 
+\newpage
+
+\section*{Aufgabe 3: DFT/Abtastung/Abtasttheorem}
+\subsection*{a)}
+
+$\Delta x=\frac{L}{N}=\frac{10\,mm}{256}=0.0391\,mm$
+
+\subsection*{b)}
+
+$u_{a}=\frac{N}{L}=\frac{256}{10\,mm}=25.6\,\frac{1}{mm}$
+
+\subsection*{c)}
+
+$\Delta u=\frac{1}{N\Delta x}=\frac{1}{256\cdot0.0391\,mm}= 0.1\,\frac{1}{mm}$
+
+\subsection*{d)}
+
+Die Schwingung $\sin(16\pi k)$ besitzt eine Kreisfrequenz von $\omega=16\pi\,\frac{1}{mm}$ mit $\omega=2\pi f$ also eine Frequenz von $f=\frac{16\pi}{2\pi}\,\frac{1}{mm}=8\,\frac{1}{mm}$. Zusammen mit dem Intervall $\Delta u$ aus Tailaufgabe c) ergeben sich \\
+
+$l_{1}=\frac{f}{\Delta u}=\frac{8\,\frac{1}{mm}}{0.1\,\frac{1}{mm}}=80$ und $l_{2}=256-80=176$
+
+\subsection*{e)}
+
+$f_{max}=\frac{u_{a}}{2}=12.8\,\frac{1}{mm}$
 
 \end{document}
