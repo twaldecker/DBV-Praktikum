@@ -54,34 +54,34 @@ $\mathcal{F}\{h(x,y)\ast f(x,y)\}=F(u,v)\cdot H(u,v)$
 \newpage
 
 \section*{Aufgabe 2: Approximation von sinc(x) durch kubischen Spline}
-
+\subsection*{2a) allgemeine Herleitung}
 Ansatz und Ableitungen:\\
 \begin{equation*}
 \begin{array}{ll}
 f(x) & = 
  \left\{ 
-  \begin{array}{l}
-   f_1(x) = a_1x^3 + b_1x^2 + c_1x + d_1\\
-   f_2(x) = a_2x^3 + b_2x^2 + c_2x + d_2\\
-   f_3(x) = 0\\
+  \begin{array}{ll}
+   f_1(x) = a_1x^3 + b_1x^2 + c_1x + d_1 & \text{für} \quad 0 < x < 1\\
+   f_2(x) = a_2x^3 + b_2x^2 + c_2x + d_2 & \text{für} \quad 1 < x < 2\\
+   f_3(x) = 0 & \text{sonst}\\
   \end{array} 
  \right.
-\\[0.5cm]
+\\[1cm]
 f'(x) & = 
  \left\{ 
-  \begin{array}{l}
-   f_1'(x) = 3a_1x^2 + 2b_1x + c_1 \\
-   f_2'(x) = 3a_2x^2 + 2b_2x + c_2 \\
-   f_3'(x) = 0\\
+  \begin{array}{ll}
+   f_1'(x) = 3a_1x^2 + 2b_1x + c_1 & \text{für} \quad 0 < x < 1\\
+   f_2'(x) = 3a_2x^2 + 2b_2x + c_2 & \text{für} \quad 1 < x < 2\\
+   f_3'(x) = 0 & \text{sonst}\\
   \end{array} 
  \right.
-\\[0.5cm]
+\\[1cm]
 f''(x) & = 
  \left\{
-  \begin{array}{l}
-   f_1''(x) = 6a_1x + 2b_1\\
-   f_2''(x) = 6a_2x + 2b_2\\
-   f_3''(x) = 0\\
+  \begin{array}{ll}
+   f_1''(x) = 6a_1x + 2b_1 & \text{für} \quad 0 < x < 1\\
+   f_2''(x) = 6a_2x + 2b_2 & \text{für} \quad 1 < x < 2\\
+   f_3''(x) = 0 & \text{sonst}\\
   \end{array}
  \right.
  \end{array}
@@ -145,8 +145,37 @@ Das Ergebins in \eqref{g1} eingesetzt ergibt den Ausdruck für $b_1$:
 \begin{align*}
 &b_1 = -1 - a_1\\
 &b_1 = -1 - (a_2 + 2)\\
-&b_1 = -a_2 - 3\\
+&\underline{b_1 = -a_2 - 3}\\
 \end{align*}
+
+\subsection*{2b) Lösung im Skript}
+\begin{equation*}
+s3(t) = 
+ \left\{ 
+  \begin{array}{ll}
+   \lvert t^3\rvert - 2t^2 + 1 & \text{für} \quad 0 \leq t < 1\\
+   - \lvert t^3\rvert + 5t^2 -8\rvert t \lvert +4 & \text{für} \quad 1 \leq \rvert t \lvert < 2\\
+   0 & \text{sonst}\\
+  \end{array} 
+ \right.
+\end{equation*}
+
+Für diese Lösung gilt: $a_2 = -1$. Setzt man dieses $a_2$ in die in 2a berechneten allgemeinen Ausdrücke ein erhält man:
+\begin{align*}
+a_1 &= a_2 + 2 = -1 + 2 = 1\\
+b_1 &= -a_2 - 3 = 1 - 3 = -2\\
+c_1 &= 0\\
+d_1 &= 1\\
+a_2 &= -1\\
+b_2 &= -5a_2 = -5(-1) = 5\\
+c_2 &= 8a_2 = 8(-1) = -8\\
+d_2 &= -4a_2 = -4(-1) = 4
+\end{align*}
+Diese Lösung stimmt mit der Angabe im Skript überein.
+
+\subsection*{2c) Lösung falls $f_1''(1) = f_2''(1)$}
+
+
 \newpage
 
 \section*{Aufgabe 3: DFT/Abtastung/Abtasttheorem}
