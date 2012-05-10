@@ -1,8 +1,11 @@
 \documentclass[a4paper,11pt,oneside]{scrartcl}
 \parindent 0pt
 \usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
 
 %opening
 \title{Digitale Bildverarbeitung - Lösung Blatt 3 (Fourier-Transf., Splines, DFT)}
@@ -85,7 +88,7 @@ f''(x) & =
   \end{array}
  \right.
  \end{array}
-\end{equation*}\\
+\end{equation*}
 
 Einsetzen der bekannten Werte der Funktion und der Ableitung an der Stelle 0 ergibt direkt Lösungen für $c_1$ und $d_1$:
 \begin{align*}
@@ -145,7 +148,7 @@ Das Ergebins in \eqref{g1} eingesetzt ergibt den Ausdruck für $b_1$:
 \begin{align*}
 &b_1 = -1 - a_1\\
 &b_1 = -1 - (a_2 + 2)\\
-&\underline{b_1 = -a_2 - 3}\\
+&\underline{b_1 = -a_2 - 3}
 \end{align*}
 
 \subsection*{2b) Lösung im Skript}
@@ -155,7 +158,7 @@ s3(t) =
   \begin{array}{ll}
    \lvert t^3\rvert - 2t^2 + 1 & \text{für} \quad 0 \leq t < 1\\
    - \lvert t^3\rvert + 5t^2 -8\rvert t \lvert +4 & \text{für} \quad 1 \leq \rvert t \lvert < 2\\
-   0 & \text{sonst}\\
+   0 & \text{sonst}
   \end{array} 
  \right.
 \end{equation*}
@@ -195,6 +198,32 @@ c_2 &= 8a_2 = 8 \cdot \frac{3}{4} = 12\\
 d_2 &= -4a_2 = -4 \cdot \frac{3}{4} = -3
 \end{align*}
 
+Interpretation:\\
+Wenn die Funktion gezeichnet wird ergibt sich eine Funktion die kein kubischer Spline ist. Es sieht aus als ob bei den Stellen -1 und +1 ein Sprung zwischen den Funktionen vorhanden ist. Dies darf bei Spline-Approximation nicht vorkommen.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{spline2}
+\end{center}
+\caption{Die Funktion mit $f_1''(1) = f_2''(1)$ (rot)}
+\end{figure}
+
+Rechnerische überprüfung:
+\begin{align*}
+f_1(1) &= f_2(1)\\
+\frac{11}{4}t^3 - \frac{15}{4}t^2 + 1 &= \frac{3}{4}t^3 - \frac{15}{4}t^2 + 12t - 3\\
+\frac{11}{4} - \frac{15}{4} + 1 &= \frac{3}{4} - \frac{15}{4} + 12 - 3\\
+\frac{11}{4} + 1 - \frac{3}{4}  - 12 + 3 &= 0\\
+2+1-12+3&=0\\
+-6&=0 \quad \lightning
+\end{align*}
+Die rechnerische Überprüfung ergibt das die "Lösung" gar keine richtige Lösung des Gleichungssystems ist.
+\begin{figure}
+\begin{center}
+\includegraphics[width=.5\textwidth]{spline1}
+\end{center}
+\caption{Der kubische Spline (blau) und die sinc(x) Funktion (grün)}
+\end{figure}
 \newpage
 
 \section*{Aufgabe 3: DFT/Abtastung/Abtasttheorem}
@@ -220,6 +249,6 @@ $l_{1}=\frac{f}{\Delta u}=\frac{8\,\frac{1}{mm}}{0.1\,\frac{1}{mm}}=80$ und $l_{
 
 $f_{max}=\frac{u_{a}}{2}=12.8\,\frac{1}{mm}$
 
-\end{document
+\end{document}
 
 
