@@ -1,39 +1,35 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.4.26)  9 MAY 2012 12:11
-=======
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.4.27)  9 MAY 2012 12:13
->>>>>>> 7c31550b8362e823ca71ba0af8d6db2dde43d9d1
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.4.26)  10 MAY 2012 11:53
 entering extended mode
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **DBV_3_Fourier_Splines_DFT_Gruppe_08.tex
 (./DBV_3_Fourier_Splines_DFT_Gruppe_08.tex
-LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, ngerman, german, german-x-2009-06-19, ngerman-x-2009-06-19, loaded.
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman, ngerman, swissgerman, loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
+Document Class: scrartcl 2011/06/16 v3.09a KOMA-Script document class (article)
 
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrartcl.cls
-Document Class: scrartcl 2009/07/24 v3.04a KOMA-Script document class (article)
-
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrkbase.sty
-Package: scrkbase 2009/07/24 v3.04a KOMA-Script package (KOMA-Script-dependent 
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2011/06/16 v3.09a KOMA-Script package (KOMA-Script-dependent 
 basics and keyval usage)
 
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrbase.sty
-Package: scrbase 2009/07/24 v3.04a KOMA-Script package (KOMA-Script-independent
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2011/06/16 v3.09a KOMA-Script package (KOMA-Script-independent
  basics and keyval usage)
 
-(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrlfile.sty
-Package: scrlfile 2009/03/25 v3.03 KOMA-Script package (loading files)
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2011/03/09 v3.09 KOMA-Script package (loading files)
 
-Package scrlfile, 2009/03/25 v3.03 KOMA-Script package (loading files)
+Package scrlfile, 2011/03/09 v3.09 KOMA-Script package (loading files)
                   Copyright (C) Markus Kohm
 
-))) (/usr/share/texmf-texlive/tex/latex/koma-script/tocbasic.sty
-Package: tocbasic 2009/06/08 v3.03b KOMA-Script package (handling toc-files)
+))) (/usr/share/texlive/texmf-dist/tex/latex/koma-script/tocbasic.sty
+Package: tocbasic 2011/05/30 v3.09a KOMA-Script package (handling toc-files)
 )
 Package tocbasic Info: omitting babel extension for `toc'
 (tocbasic)             because of feature `nobabel' available
@@ -51,21 +47,21 @@ Package scrartcl Info: You've used obsolete option `11pt'.
 (scrartcl)             by `fontsize=11pt'.
 Class scrartcl Info: You've used standard option `oneside'.
 (scrartcl)           This is correct!
-(scrartcl)           Internaly I'm using `twoside=false'.
+(scrartcl)           Internally I'm using `twoside=false'.
 (scrartcl)           If you'd like to set the option with \KOMAoptions,
 (scrartcl)           you'd have to use `twoside=false' there
 (scrartcl)           instead of `oneside', too.
 Class scrartcl Info: File `scrsize11pt.clo' used to setup font sizes on input l
-ine 1171.
+ine 1247.
 
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrsize11pt.clo
-File: scrsize11pt.clo 2009/07/24 v3.04a KOMA-Script font size class option (11p
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
+File: scrsize11pt.clo 2011/06/16 v3.09a KOMA-Script font size class option (11p
 t)
 )
-(/usr/share/texmf-texlive/tex/latex/koma-script/typearea.sty
-Package: typearea 2009/07/24 v3.04a KOMA-Script package (type area)
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/typearea.sty
+Package: typearea 2011/06/16 v3.09a KOMA-Script package (type area)
 
-Package typearea, 2009/07/24 v3.04a KOMA-Script package (type area)
+Package typearea, 2011/06/16 v3.09a KOMA-Script package (type area)
                   Copyright (C) Frank Neukam, 1992-1994
                   Copyright (C) Markus Kohm, 1994-
 
@@ -73,13 +69,13 @@ Package typearea, 2009/07/24 v3.04a KOMA-Script package (type area)
 \ta@div=\count79
 Package typearea Info: You've used standard option `a4paper'.
 (typearea)             This is correct!
-(typearea)             Internaly I'm using `paper=a4'.
+(typearea)             Internally I'm using `paper=a4'.
 (typearea)             If you'd like to set the option with \KOMAoptions,
 (typearea)             you'd have to use `paper=a4' there
 (typearea)             instead of `a4paper', too.
 Package typearea Info: You've used standard option `oneside'.
 (typearea)             This is correct!
-(typearea)             Internaly I'm using `twoside=false'.
+(typearea)             Internally I'm using `twoside=false'.
 (typearea)             If you'd like to set the option with \KOMAoptions,
 (typearea)             you'd have to use `twoside=false' there
 (typearea)             instead of `oneside', too.
@@ -102,7 +98,7 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 11.0pt
 (typearea)              \footskip       = 47.60002pt
 (typearea)              \baselineskip   = 13.6pt
-(typearea)              on input line 1115.
+(typearea)              on input line 1139.
 )
 \c@part=\count80
 \c@section=\count81
@@ -116,19 +112,19 @@ Package typearea Info: These are the values describing the layout:
 \c@figure=\count86
 \c@table=\count87
 \bibindent=\dimen102
-) (/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks15
 \inpenc@posthook=\toks16
 
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-(/usr/share/texmf-texlive/tex/latex/base/t1enc.dfu
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1enc.dfu
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -278,7 +274,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-(/usr/share/texmf-texlive/tex/latex/base/ot1enc.dfu
+(/usr/share/texlive/texmf-dist/tex/latex/base/ot1enc.dfu
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -309,7 +305,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-(/usr/share/texmf-texlive/tex/latex/base/omsenc.dfu
+(/usr/share/texlive/texmf-dist/tex/latex/base/omsenc.dfu
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -333,24 +329,24 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip47
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks17
 \ex@=\dimen103
 ))
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen104
 )
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count88
@@ -391,10 +387,10 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
-(/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2009/06/22 v3.00
 
-(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
@@ -404,22 +400,6 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (./DBV_3_Fourier_Splines_DFT_Gruppe_08.aux)
 \openout1 = `DBV_3_Fourier_Splines_DFT_Gruppe_08.aux'.
 
-<<<<<<< HEAD
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-
-Underfull \hbox (badness 10000) in paragraph at lines 52--54
-=======
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
@@ -434,17 +414,17 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Try loading font information for U+msa on input line 14.
 
-(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 14.
 
-(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+{/usr/share/texlive/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 Underfull \hbox (badness 10000) in paragraph at lines 20--21
 
  []
@@ -506,7 +486,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 46--47
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 48--49
->>>>>>> 7c31550b8362e823ca71ba0af8d6db2dde43d9d1
 
  []
 
@@ -516,70 +495,60 @@ Underfull \hbox (badness 10000) in paragraph at lines 50--51
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 69--71
+Underfull \hbox (badness 10000) in paragraph at lines 58--91
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--74
+Underfull \hbox (badness 10000) in paragraph at lines 92--97
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--77
+Underfull \hbox (badness 10000) in paragraph at lines 98--108
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--116
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--120
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 95--96
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
 
 [4] (./DBV_3_Fourier_Splines_DFT_Gruppe_08.aux) ) 
 Here is how much of TeX's memory you used:
-<<<<<<< HEAD
- 2033 strings out of 495037
- 27861 string characters out of 3180907
- 103990 words of memory out of 3000000
- 5248 multiletter control sequences out of 15000+200000
- 6712 words of font info for 25 fonts, out of 3000000 for 9000
- 14 hyphenation exceptions out of 8191
- 38i,13n,47p,276b,218s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on DBV_3_Fourier_Splines_DFT_Gruppe_08.pdf (1 page, 85053 bytes)
-.
-=======
- 2237 strings out of 495021
- 29302 string characters out of 1181035
- 101307 words of memory out of 3000000
- 5434 multiletter control sequences out of 15000+50000
+ 2354 strings out of 495037
+ 31529 string characters out of 3180907
+ 108612 words of memory out of 3000000
+ 5545 multiletter control sequences out of 15000+200000
  12368 words of font info for 48 fonts, out of 3000000 for 9000
- 28 hyphenation exceptions out of 8191
- 36i,7n,45p,312b,216s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-
-Output written on DBV_3_Fourier_Splines_DFT_Gruppe_08.pdf (4 pages, 130130 byte
+ 14 hyphenation exceptions out of 8191
+ 38i,13n,49p,312b,216s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on DBV_3_Fourier_Splines_DFT_Gruppe_08.pdf (4 pages, 123298 byte
 s).
->>>>>>> 7c31550b8362e823ca71ba0af8d6db2dde43d9d1
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
+ 61 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
