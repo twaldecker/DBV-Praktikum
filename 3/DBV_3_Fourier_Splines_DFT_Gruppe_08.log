@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.4.26)  10 MAY 2012 14:05
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.4.26)  10 MAY 2012 14:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -505,7 +505,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--89
  []
 
 [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 196--197
+Underfull \hbox (badness 10000) in paragraph at lines 215--216
 
  []
 
@@ -530,7 +530,7 @@ fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on DBV_3_Fourier_Splines_DFT_Gruppe_08.pdf (6 pages, 135883 byte
+Output written on DBV_3_Fourier_Splines_DFT_Gruppe_08.pdf (6 pages, 136841 byte
 s).
 PDF statistics:
  71 PDF objects out of 1000 (max. 8388607)
