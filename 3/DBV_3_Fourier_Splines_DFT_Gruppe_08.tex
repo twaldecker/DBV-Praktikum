@@ -55,26 +55,68 @@ $\mathcal{F}\{h(x,y)\ast f(x,y)\}=F(u,v)\cdot H(u,v)$
 
 \section*{Aufgabe 2: Approximation von sinc(x) durch kubischen Spline}
 
-\begin{displaymath}
-f(x) = 
+Ansatz und Ableitungen:\\
+\begin{math}
+\begin{array}{ll}
+f(x) & = 
  \left\{ 
   \begin{array}{l}
    f_1(x) = a_1x^3 + b_1x^2 + c_1x + d_1\\
    f_2(x) = a_2x^3 + b_2x^2 + c_2x + d_2\\
    f_3(x) = 0\\
   \end{array} 
-   \right.
-\end{displaymath}
+ \right.
+\\[0.5cm]
+f'(x) & = 
+ \left\{ 
+  \begin{array}{l}
+   f_1'(x) = 3a_1x^2 + 2b_1x + c_1 \\
+   f_2'(x) = 3a_2x^2 + 2b_2x + c_2 \\
+   f_3'(x) = 0\\
+  \end{array} 
+ \right.
+\\[0.5cm]
+f''(x) & = 
+ \left\{
+  \begin{array}{l}
+   f_1''(x) = 6a_1x + 2b_1\\
+   f_2''(x) = 6a_2x + 2b_2\\
+   f_3''(x) = 0\\
+  \end{array}
+ \right.
+ \end{array}
+\end{math}\\
+$f_1(0) = 1 = a_1 \cdot 0 + b_1 \cdot 0 + c_1 \cdot 0 + d_1 \Rightarrow d_1 = 1$\\
+$f_1'(0) = 0 = 3a_1 \cdot 0 + 2b_1 \cdot 0 + c_1 \Rightarrow c_1 = 0$\\
 
-$f_1'(x) = 3a_1x^2 + 2b_1x + c_1 $\\
-$f_2'(x) = 3a_2x^2 + 2b_2x + c_2 $\\
+I $f_1(1) = 0 = a_1 + b_1 + 1$\\
+II $f_2(1) = 0 = a_2 + b_2 + c_2 + d_2$\\
+III $f_2(2) = 0 = 8a_2 + 4b_2 + 2c_2 + d_2$\\
+IV $f_1'(1) = f_2'(1): 3a_1 + 2b_1 = 3a_2 + 2b_2 + c_2$\\
+V $f_2'(2) = 0 = 12a_2 + 4b_2 + c_2$\\
 
-$f_1''(x) = 6a_1x + 2b_1$\\
-$f_2''(x) = 6a_2x + 2b_2$\\
+I: $a_1 + b_1 = -1 \Rightarrow b_1 = -1 -a_1$\\
+V: $12a_2 + 4b_2 + c_2 = 0 \Rightarrow c_2 = -12a_2 - 4b_2$\\
+II: $a_2 + b_2 + c_2 + d_2 = 0 \Rightarrow d_2 = -a_2 - b_2 - c_2 \Rightarrow -a_2 - b_2 + 12a_2 +4b_2 = 11a_2 + 3b_2 = d_2$\\
+III: $8a_2 + 4b_2 + 2c_2 + d_2 = 0$\\
+$8a_2 + 4b_2 + 2(-12a_2 - 4b_2) + 11a_2 + 3b_2 = 0$\\
+$a_2(8-24+11) + b_2(4-8+3) = 0$\\
+$b_2 = -5a_2$\\
+V: $c_2 = -12a_2 - 4b_2$\\
+$c_2 = -12a_2 -4(-5a_2) = -12a_2 + 20a_2$\\
+$c_2 = 8a_2$\\
 
-$f_1(0) = 1 = a_1 \cdot 0 + b_1 \cdot 0 + c_1 \cdot 0 + d_1 = d_1 = 1$\\
-$f_1'(0) = 0 = 3a_1 \cdot 0 + 2b_1 \cdot 0 + c_1 = c_1 = 0$\\
+II: $d_2 = 11a_2 + 3b_2 = 11a_2 + 3(-5a_2)$\\
+$d_2 = -4a_2$
 
+
+IV: $3a_1 + 2b_1 = 3a_2 + 2b_2 + c_2$\\
+$3a_1 + 2(-1 -a_1) = 3a_2 + 2b_2 +c_2$\\
+$a_1 -2 = 3a_2 + 2b_2 +c_2$\\
+
+I: $b_1 = -1 - a_1$\\
+$b_1 = -1 - (a_2 + 2)$\\
+$b_1 = -a_2 - 3$\\
 \newpage
 
 \section*{Aufgabe 3: DFT/Abtastung/Abtasttheorem}
