@@ -18,26 +18,26 @@
 % ------------------------------------------------------------------------
 %% Initialisierung:
 coder = 'Cinepak';    %'None', 'Cinepak', 'Indeo3'
-addpath('../Packages_Matlab');
-addpath('../allg/');
-addpath('../allg/Bilder');
+addpath( '../Packages_Matlab' );
+addpath( '../allg/' );
+addpath( '../allg/Bilder' );
 
 %--------------------------------------------------------------------------
 %% Bild einlesen:
-g = imread( [allg_path, 'Bilder/Tile-gray.pgm'] );
-figure(1); imshow( g )
+g = imread( 'Tile-gray.pgm' );
+figure( 1 ), imshow( g );
 
 %--------------------------------------------------------------------------
 %% Ableitung in x-Richtung:
 % Leiten Sie das Bild in x-Richtung mit einem 3x3-Binomialfilter ab.
 % Dazu steht die Funktion Binomialfilter() bereit.
-hdx = ???
-gdx = ???
+hdx = Binomialfilter( [3,0,3,1], 0 );
+gdx = imfilter( double( g ), double( hdx ) );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure(2); imshow(???);
-imwrite( ???, 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
+figure( 2 ); imshow( uint8( gdx + 127 ) );
+imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie das Ergebnis bzgl. Kanten und Fl�chen:
 % A: ???
@@ -47,12 +47,13 @@ imwrite( ???, 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 % Leiten Sie das Bild in Richtung des Vektors n=(x,y)'=(2,1)', also etwa
 % in 26-Grad-Richtung ab:
 % Verwenden Sie dabei 3x3-Binomialfilter:
-???
+%hdn = Binomialfilter( [3,0,3,1], 0 );
+%gdn = imfilter( double( g ), double( hdn ) );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure(3); imshow(???);
-imwrite( ???, 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
+%figure(3); imshow(???);
+%imwrite( ???, 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
@@ -64,13 +65,13 @@ imwrite( ???, 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
 %% Laplace mit Binomialfilter:
 % Erzeugen Sie den 7x7-Binomial-Laplace-Filter. Wie lautet der Operator?
 % Filtern Sie das Bild damit:
-hblap = ???
-gblap = ???
+%hblap = ???
+%gblap = ???
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure(5); imshow(???);
-imwrite( ???, 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
+%figure(5); imshow(???);
+%imwrite( ???, 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
@@ -86,8 +87,8 @@ imwrite( ???, 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
 % - Berechnung des Betragsspektrums
 % - Beurteilung und Begr�ndung mittels "Anschauen".
 
-???
+%???
 
 
 %%
-'fertig'
+%'fertig'
