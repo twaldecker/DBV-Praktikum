@@ -40,7 +40,10 @@ figure( 2 ), imshow( uint8( gdx + 127 ) );
 imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie das Ergebnis bzgl. Kanten und Fl�chen:
-% A: ???
+% A: Kanten (Schwarze bzw. Weiße) im Ableitungsbild entsprechen
+% Grauwertübergänge von Hell zu Dunkel bzw. Dunkel zu Hell.
+% Flächen mit ähnlichem Grauwert im Ableitungsbild bedeuten keine / wenig
+% Änderung im Bild.
 
 %--------------------------------------------------------------------------
 %% Richtungsableitung:
@@ -60,9 +63,11 @@ imwrite( uint8( gdn + 127 ), 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
-% A: ???
+% A: Die schrägen Kanten werden sehr viel deutlicher gezeigt als die
+% die aus den Senkrechten Linien resultierenden.
 % Frage: Warum ist das so?
-% A: ???
+% A: Weil für den gerichteten Ableitungsfilter die Kanten stärker sind, d.h. die
+% übergänge schneller sind.
 
 %--------------------------------------------------------------------------
 %% Laplace mit Binomialfilter:
@@ -80,7 +85,9 @@ imwrite( uint8( gblap + 127 ), 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
-% A: ???
+% A: Die Grauwertübergänge des Originalbilds werden nur dunkler
+% dargestellt. Die Flächen sind nicht mehr einheitlich grau. die engeren
+% Bereiche sind heller als die großen Bereiche.
 % Frage: Warum ist das so?
 % A: ???
 

@@ -10,6 +10,7 @@ who
 
 %% 4. Suchpfad:
 path
+addpath
 
 %% 5. Löschen einer Variablen a
 clear a
