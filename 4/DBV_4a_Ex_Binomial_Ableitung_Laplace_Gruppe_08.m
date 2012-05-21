@@ -31,12 +31,12 @@ figure( 1 ), imshow( g );
 %% Ableitung in x-Richtung:
 % Leiten Sie das Bild in x-Richtung mit einem 3x3-Binomialfilter ab.
 % Dazu steht die Funktion Binomialfilter() bereit.
-hdx = Binomialfilter( [3,0,3,1], 0 );
-gdx = imfilter( double( g ), double( hdx ) );
+[hdx, nfactor] = Binomialfilter( [3,0,3,1], 0 );
+gdx = nfactor .* imfilter( double( g ), double( hdx ) );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure( 2 ); imshow( uint8( gdx + 127 ) );
+figure( 2 ), imshow( uint8( gdx + 127 ) );
 imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie das Ergebnis bzgl. Kanten und Fl�chen:
@@ -47,13 +47,16 @@ imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 % Leiten Sie das Bild in Richtung des Vektors n=(x,y)'=(2,1)', also etwa
 % in 26-Grad-Richtung ab:
 % Verwenden Sie dabei 3x3-Binomialfilter:
-%hdn = Binomialfilter( [3,0,3,1], 0 );
-%gdn = imfilter( double( g ), double( hdn ) );
+phi = atan2( -2,1 );
+hdx = Binomialfilter( [3,0,3,1], 0 );
+[hdy, nfactor] = Binomialfilter( [3,1,3,0], 0 );
+hdn = cos( phi ) .* hdx + sin( phi ) .* hdy;
+gdn = nfactor .* imfilter( double( g ), double( hdn ) );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-%figure(3); imshow(???);
-%imwrite( ???, 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
+figure( 3 ), imshow( uint8( gdn + 127 ) );
+imwrite( uint8( gdn + 127 ), 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
@@ -65,13 +68,15 @@ imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 %% Laplace mit Binomialfilter:
 % Erzeugen Sie den 7x7-Binomial-Laplace-Filter. Wie lautet der Operator?
 % Filtern Sie das Bild damit:
-%hblap = ???
-%gblap = ???
+hblabx = Binomialfilter( [7,2,7,0], 0 );
+[hblaby, nfactor] = Binomialfilter( [7,0,7,2], 0 );
+hblap = 0.5 .* ( hblabx + hblaby );
+gblap = nfactor .* imfilter( double( g ), double( hblap ) );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-%figure(5); imshow(???);
-%imwrite( ???, 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
+figure( 4 ), imshow( uint8( gblap + 127 ) );
+imwrite( uint8( gblap + 127 ), 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
@@ -86,9 +91,23 @@ imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 % Hinweise:
 % - Berechnung des Betragsspektrums
 % - Beurteilung und Begr�ndung mittels "Anschauen".
+fg = fftshift( fft2( g ) );
+afg = abs( fg );
+afg = afg / max( max ( afg ) ) * 255;
+figure( 5 ), imshow( afg );
 
-%???
+% Werte für xmax/ymax aus Spektrum ablesen:
 
+xmax = 430;
+ymax = 95;
+
+du = 1/512; % ???
+sizex = round( 1 / ( ( xmax - 256 ) * du ) )
+sizey = round( 1 / ( ( 256 - ymax ) * du ) )
+
+[h, nfactor] = Binomialfilter( [sizex,0,sizey,0], 0 );
+gsam = nfactor .* imfilter( double( g ), double( h ) );
+figure( 6 ), imshow( uint8( gsam ) );
 
 %%
 %'fertig'
