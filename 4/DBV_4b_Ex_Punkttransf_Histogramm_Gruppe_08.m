@@ -24,14 +24,14 @@ addpath('../allg/Bilder');
 
 %--------------------------------------------------------------------------
 %% Bild einlesen:
-g1 = imread( [allg_path, 'Bilder/forest_gray_reduced.pgm'] );
+g1 = imread( 'Bilder/forest_gray_reduced.pgm' );
 
 %--------------------------------------------------------------------------
 %% Histogramm:
 % Erzeugen Sie das Histogramm des Bildes und stellen Sie es 
 % zusammen mit dem Bild dar:
 fig1 = figure(1); imshow( g1 );
-fig2 = figure(2); ???
+fig2 = figure(2); imhist(g1);
 
 saveas( fig2, 'Ergebnisse/g1_histo.jpg' );
 
@@ -39,10 +39,14 @@ saveas( fig2, 'Ergebnisse/g1_histo.jpg' );
 %% Aufhellung:
 % Hellen Sie das Bild g1 deutlich auf.
 % Stellen Sie es wieder mit dem Histogramm dar.
-g2 = ???
+
+%Aufhellung: lineare dehnung mit maximalem grauwert auf 255.
+g2 = cast(g1, 'double')./cast(max(max(g1)), 'double').*255;
+g2 = round(g2);
+g2 = cast(g2, 'uint8');
 
 figure(1); imshow( g2 );
-figure(2); ???
+figure(2); imhist( g2 );
 
 imwrite( g2, 'Ergebnisse/g2-aufgehellt.jpg' );
 saveas( fig2, 'Ergebnisse/g2-aufgehellt_histo.jpg' );
