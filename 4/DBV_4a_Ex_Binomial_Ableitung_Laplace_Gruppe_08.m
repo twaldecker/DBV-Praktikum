@@ -91,6 +91,9 @@ imwrite( uint8( gblap + 127 ), 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
 % Frage: Warum ist das so?
 % A: ???
 
+% Fugen: grau -> hell -> dunkel grau (vergleich mit x-Ableitung)
+% Rotationsinvarianz des Laplace-Operators -> alle Kanten sehen gleich aus
+
 %--------------------------------------------------------------------------
 %% Frequenzgang von Binomialfiltern:
 % Bestimmen Sie die Maskenbreite eines eindimensional Binomialfilters,
@@ -106,14 +109,14 @@ afg = afg / max( max ( afg ) ) * 255;
 figure( 5 ), imshow( afg );
 
 % Werte für xfmax und yfmax aus Spektrum ablesen:
-xfmax = 340;
-yfmax = 180;
+xfmax = 384;
+yfmax = 127;
 
 % Berechnung der Maskengröße in x- und y-Richtung über die maximalen
 % Frequenzen in x- und y-Richtung mit Hilfe des Parameters delta u
 du = 1/512;
-sizex = round( 1 / ( ( xmax - 256 ) * du ) )
-sizey = round( 1 / ( ( 256 - ymax ) * du ) )
+sizex = round( 1 / ( ( xfmax - 256 ) * du ) )
+sizey = round( 1 / ( ( 256 - yfmax ) * du ) )
 
 % Filterung des Bildes mit einem 3x3 Binominalfilter
 [h, nfactor] = Binomialfilter( [sizex,0,sizey,0], 0 );
