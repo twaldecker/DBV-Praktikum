@@ -24,20 +24,20 @@ addpath( '../allg/Bilder' );
 
 %--------------------------------------------------------------------------
 %% Bild einlesen:
-g = imread( 'Tile-gray.pgm' );
+g = imread( 'Bilder/Tile-gray.pgm' );
 figure( 1 ), imshow( g );
 
 %--------------------------------------------------------------------------
 %% Ableitung in x-Richtung:
 % Leiten Sie das Bild in x-Richtung mit einem 3x3-Binomialfilter ab.
 % Dazu steht die Funktion Binomialfilter() bereit.
-[hdx, nfactor] = Binomialfilter( [3,0,3,1], 0 );
-gdx = nfactor .* imfilter( double( g ), double( hdx ) );
+hdx = Binomialfilter( [3,0,3,1], 1 );
+gdx = imfilter( g, hdx );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure( 2 ), imshow( uint8( gdx + 127 ) );
-imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
+figure( 2 ), imshow( gdx + 127 );
+imwrite( gdx + 127, 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie das Ergebnis bzgl. Kanten und Fl�chen:
 % A: Kanten (Schwarze bzw. Weiße) im Ableitungsbild entsprechen
@@ -50,16 +50,16 @@ imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 % Leiten Sie das Bild in Richtung des Vektors n=(x,y)'=(2,1)', also etwa
 % in 26-Grad-Richtung ab:
 % Verwenden Sie dabei 3x3-Binomialfilter:
-phi = atan2( -2,1 );
-hdx = Binomialfilter( [3,0,3,1], 0 );
-[hdy, nfactor] = Binomialfilter( [3,1,3,0], 0 );
+phi = atan2( 1,2 );
+hdx = Binomialfilter( [3,0,3,1], 1 );
+hdy = Binomialfilter( [3,1,3,0], 1 );
 hdn = cos( phi ) .* hdx + sin( phi ) .* hdy;
-gdn = nfactor .* imfilter( double( g ), double( hdn ) );
+gdn = imfilter( g, hdn);
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure( 3 ), imshow( uint8( gdn + 127 ) );
-imwrite( uint8( gdn + 127 ), 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
+figure( 3 ), imshow( gdn + 127 );
+imwrite( gdn + 127, 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
@@ -73,15 +73,15 @@ imwrite( uint8( gdn + 127 ), 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
 %% Laplace mit Binomialfilter:
 % Erzeugen Sie den 7x7-Binomial-Laplace-Filter. Wie lautet der Operator?
 % Filtern Sie das Bild damit:
-hblabx = Binomialfilter( [7,2,7,0], 0 );
-[hblaby, nfactor] = Binomialfilter( [7,0,7,2], 0 );
+hblabx = Binomialfilter( [7,2,7,0], 1 );
+hblaby = Binomialfilter( [7,0,7,2], 1 );
 hblap = 0.5 .* ( hblabx + hblaby );
-gblap = nfactor .* imfilter( double( g ), double( hblap ) );
+gblap = imfilter( g, hblap );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure( 4 ), imshow( uint8( gblap + 127 ) );
-imwrite( uint8( gblap + 127 ), 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
+figure( 4 ), imshow( gblap + 127 );
+imwrite( gblap + 127, 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
@@ -121,9 +121,9 @@ sizex = round( 1 / ( ( freqfacx * 0.5 * size( g,2 ) ) * dux ) )
 sizey = round( 1 / ( ( freqfacy * 0.5 * size( g,1 ) ) * duy ) )
 
 % Filterung des Bildes mit einem entsprechenden Binominalfilter
-[h, nfactor] = Binomialfilter( [sizex,0,sizey,0], 0 );
-gsam = nfactor .* imfilter( double( g ), double( h ) );
-figure( 6 ), imshow( uint8( gsam ) );
+h = Binomialfilter( [sizex,0,sizey,0], 1 );
+gsam = imfilter( g, h );
+figure( 6 ), imshow( gsam );
 
 % Berechnung des gefilterten Betragsspektrums
 fg = fftshift( fft2( gsam ) );
