@@ -98,23 +98,27 @@ imwrite( uint8( gblap + 127 ), 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
 % Hinweise:
 % - Berechnung des Betragsspektrums
 % - Beurteilung und Begr�ndung mittels "Anschauen".
+
+% Berechnung des Betragsspektrums
 fg = fftshift( fft2( g ) );
 afg = abs( fg );
 afg = afg / max( max ( afg ) ) * 255;
 figure( 5 ), imshow( afg );
 
-% Werte für xmax/ymax aus Spektrum ablesen:
+% Werte für xfmax und yfmax aus Spektrum ablesen:
+xfmax = 340;
+yfmax = 180;
 
-xmax = 430;
-ymax = 95;
-
-du = 1/512; % ???
+% Berechnung der Maskengröße in x- und y-Richtung über die maximalen
+% Frequenzen in x- und y-Richtung mit Hilfe des Parameters delta u
+du = 1/512;
 sizex = round( 1 / ( ( xmax - 256 ) * du ) )
 sizey = round( 1 / ( ( 256 - ymax ) * du ) )
 
+% Filterung des Bildes mit einem 3x3 Binominalfilter
 [h, nfactor] = Binomialfilter( [sizex,0,sizey,0], 0 );
 gsam = nfactor .* imfilter( double( g ), double( h ) );
 figure( 6 ), imshow( uint8( gsam ) );
 
 %%
-%'fertig'
+'fertig'
