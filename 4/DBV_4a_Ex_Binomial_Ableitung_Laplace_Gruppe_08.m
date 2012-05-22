@@ -108,20 +108,28 @@ afg = abs( fg );
 afg = afg / max( max ( afg ) ) * 255;
 figure( 5 ), imshow( afg );
 
-% Werte für xfmax und yfmax aus Spektrum ablesen:
-xfmax = 384;
-yfmax = 127;
+% Frequenzfaktor legt die Breite des TP fest [0;1]
+freqfacx = 0.5;
+freqfacy = 0.5;
 
-% Berechnung der Maskengröße in x- und y-Richtung über die maximalen
-% Frequenzen in x- und y-Richtung mit Hilfe des Parameters delta u
-du = 1/512;
-sizex = round( 1 / ( ( xfmax - 256 ) * du ) )
-sizey = round( 1 / ( ( 256 - yfmax ) * du ) )
+% Berechnung der diskreten Frequenzwertdeltas
+dux = 1 / size( g,2 );
+duy = 1 / size( g,1 );
 
-% Filterung des Bildes mit einem 3x3 Binominalfilter
+% Berechnung der Größe der Operatormasken in x- und y-Richtung
+sizex = round( 1 / ( ( freqfacx * 0.5 * size( g,2 ) ) * dux ) )
+sizey = round( 1 / ( ( freqfacy * 0.5 * size( g,1 ) ) * duy ) )
+
+% Filterung des Bildes mit einem entsprechenden Binominalfilter
 [h, nfactor] = Binomialfilter( [sizex,0,sizey,0], 0 );
 gsam = nfactor .* imfilter( double( g ), double( h ) );
 figure( 6 ), imshow( uint8( gsam ) );
+
+% Berechnung des gefilterten Betragsspektrums
+fg = fftshift( fft2( gsam ) );
+afg = abs( fg );
+afg = afg / max( max ( afg ) ) * 255;
+figure( 7 ), imshow( afg );
 
 %%
 'fertig'
