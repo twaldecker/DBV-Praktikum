@@ -91,8 +91,11 @@ saveas( fig2, 'Ergebnisse/g4-egalisiert_histo.jpg' );
 % Bilden Sie die oberste (Bit 7) und die vierte (Bit 3) Bitebene 
 % des Bildes g3, f�r das Sie den Kontrast angehoben haben:
 % Stellen Sie diese geeignet dar:
-g5a = ???
-g5b = ???
+g5a = bitand(g3, bin2dec('10000000'));
+g5b = bitand(g3, bin2dec('00001000'));
+
+g5a(g5a>0) = 255;
+g5b(g5b>0) = 255;
 
 figure(1); imshow( g5a );
 figure(2); imshow( g5b );
@@ -100,8 +103,8 @@ figure(2); imshow( g5b );
 imwrite( g5a, 'Ergebnisse/g5a-obersteBitebene.jpg' );
 imwrite( g5a, 'Ergebnisse/g5a-vierteBitebene.jpg' );
 
-% Frage: Wieviele verschiedene Grauwerte enth�lt g5a ?
-% A: ???
+% Frage: Wieviele verschiedene Grauwerte enthält g5a ?
+% A:    %%%
 
 %--------------------------------------------------------------------------
 %% Grauwertschwelle:
