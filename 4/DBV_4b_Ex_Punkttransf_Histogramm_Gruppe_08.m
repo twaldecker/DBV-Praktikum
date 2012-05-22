@@ -40,10 +40,7 @@ saveas( fig2, 'Ergebnisse/g1_histo.jpg' );
 % Hellen Sie das Bild g1 deutlich auf.
 % Stellen Sie es wieder mit dem Histogramm dar.
 
-%Aufhellung: lineare dehnung mit maximalem grauwert auf 255.
-g2 = cast(g1, 'double')./cast(max(max(g1)), 'double').*255;
-g2 = round(g2);
-g2 = cast(g2, 'uint8');
+g2 = g1 + (255-max(max(g1)));
 
 figure(1); imshow( g2 );
 figure(2); imhist( g2 );
@@ -51,41 +48,41 @@ figure(2); imhist( g2 );
 imwrite( g2, 'Ergebnisse/g2-aufgehellt.jpg' );
 saveas( fig2, 'Ergebnisse/g2-aufgehellt_histo.jpg' );
 
-% Frage: Was bedeutet die Aufhellung f�r das Histogramm des 
+% Frage: Was bedeutet die Aufhellung für das Histogramm des 
 % aufgehellten Bildes?
-% A: ???
-%
+% A: Aufhellen bedeutet verschieben der Grauwerte im Histogramm.
 
 %--------------------------------------------------------------------------
 %% lineare Grauwertnormierung:
 % Heben Sie den Kontrast des Bildes !optimal! durch eine 
 % lineare Kennlinie an:
-???
 
-figure(1); imshow( g3 );
-figure(2); ???
+g3 = 255 / (max(max(g1)) - min(min(g1))) * (g1 - min(min(g1)));
+
+figure(5); imshow( g3 );
+figure(6); imhist( g3 );
 
 imwrite( g3, 'Ergebnisse/g3-normiert.jpg' );
 saveas( fig2, 'Ergebnisse/g3-normiert_histo.jpg' );
 
 %--------------------------------------------------------------------------
-%% Histogramm�quivalisierung bzw. -egalisierung:
-% F�hren Sie eine Histogramm�quivalisierung f�r das urspr�ngliche 
+%% Histogrammequivalisierung bzw. -egalisierung:
+% Führen Sie eine Histogrammequivalisierung für das ursprüngliche 
 % Bild g1 aus:
-g4 = ???
+g4 = histeq(g1);
 
-figure(1); imshow( g4 );
-figure(2); ???
+figure(7); imshow( g4 );
+figure(8); imhist( g4 );
 
 imwrite( g4, 'Ergebnisse/g4-egalisiert.jpg' );
 saveas( fig2, 'Ergebnisse/g4-egalisiert_histo.jpg' );
 
 % Fragen: 
-% 1) Was f�llt Ihnen auf?
-% A: ???
+% 1) Was fällt Ihnen auf?
+% A: Es rauscht voll. ???
 % 
 %
-% 2) Nennen Sie Gr�nde f�r diese Auff�lligkeiten
+% 2) Nennen Sie Gründe für diese Auffälligkeiten
 % A: ???
 % 
 
