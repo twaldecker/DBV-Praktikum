@@ -32,12 +32,12 @@ figure( 1 ), imshow( g );
 % Leiten Sie das Bild in x-Richtung mit einem 3x3-Binomialfilter ab.
 % Dazu steht die Funktion Binomialfilter() bereit.
 [hdx, nfactor] = Binomialfilter( [3,0,3,1], 0 );
-gdx = nfactor * imfilter( g, hdx );
+gdx = nfactor * imfilter( double( g ), double( hdx ) );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure( 2 ), imshow( gdx + 127 );
-imwrite( gdx + 127, 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
+figure( 2 ), imshow( uint8( gdx + 127 ) );
+imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie das Ergebnis bzgl. Kanten und Flächen:
 % A: Die weißen Kanten im Ergebnisbild entsprechen den Grauwertübergängen
@@ -56,12 +56,12 @@ phi = atan2( 1,2 );
 hdx = Binomialfilter( [3,0,3,1], 0 );
 [hdy, nfactor] = Binomialfilter( [3,1,3,0], 0 );
 hdn = cos( phi ) .* hdx + sin( phi ) .* hdy;
-gdn = nfactor * imfilter(  g, hdn );
+gdn = nfactor * imfilter(  double( g ), double( hdn ) );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure( 3 ), imshow( gdn + 127 );
-imwrite( gdn + 127, 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
+figure( 3 ), imshow( uint8( gdn + 127 ) );
+imwrite( uint8( gdn + 127 ), 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
@@ -81,12 +81,12 @@ imwrite( gdn + 127, 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
 hblabx = Binomialfilter( [7,2,7,0], 0 );
 [hblaby, nfactor] = Binomialfilter( [7,0,7,2], 0 );
 hblap = 0.5 * ( hblabx + hblaby );
-gblap = nfactor * imfilter( double( g ), hblap );
+gblap = nfactor * imfilter( double( g ), double( hblap ) );
 
 % Stellen Sie das abgeleitete Bild mit dem Nullpunkt beim mittleren
 % Grauwert der Grauwertskala dar und speichern es ab:
-figure( 4 ), imshow( uint8( gblap ) + 127 );
-imwrite( uint8( gblap ) + 127, 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
+figure( 4 ), imshow( uint8( gblap + 127 ) );
+imwrite( uint8( gblap + 127 ), 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
@@ -131,7 +131,7 @@ sizey = round( 1 / ( ( freqfacy * 0.5 * size( g,1 ) ) * duy ) )
 
 % Filterung des Bildes mit einem entsprechenden Binominalfilter
 h = Binomialfilter( [sizex,0,sizey,0], 1 );
-gsam = imfilter( g, h );
+gsam = uint8( imfilter( double( g ), double( h ) ) );
 figure( 6 ), imshow( gsam );
 
 % Berechnung des gefilterten Betragsspektrums
