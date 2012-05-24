@@ -1,0 +1,323 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08</title><meta name="generator" content="MATLAB 7.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-05-24"><meta name="DC.source" content="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Initialisierung:</a></li><li><a href="#3">Bild einlesen:</a></li><li><a href="#4">Histogramm:</a></li><li><a href="#5">Aufhellung:</a></li><li><a href="#6">lineare Grauwertnormierung:</a></li><li><a href="#7">Histogrammequivalisierung bzw. -egalisierung:</a></li><li><a href="#8">Quantisierung:</a></li><li><a href="#9">Grauwertschwelle:</a></li></ul></div><pre class="codeinput"><span class="comment">%</span>
+<span class="comment">% 4b. Praktikum - Punkttransformation + Histogramm</span>
+<span class="comment">% ------------------------------------------------</span>
+<span class="comment">% Legen Sie in Ihrem Arbeitsverzeichnis ein Unterverzeichnis an:</span>
+<span class="comment">%    4b.Punkttransf+Histogramm</span>
+<span class="comment">%</span>
+<span class="comment">% Kopieren Sie das Notebook aus ../allg dorthin und benennen Sie es um in</span>
+<span class="comment">%    4b.Punkttransf+Histogramm_Gruppe-XY.m</span>
+<span class="comment">% Legen Sie dort ein Unterverzeichnis 'Ergebnisse/' an.</span>
+<span class="comment">%</span>
+<span class="comment">% F&uuml;hren Sie die Arbeitsschritte aus, an denen ??? als Platzhalter steht</span>
+<span class="comment">% und speichern Sie das Notebook am Ende ab (zwischendurch auch</span>
+<span class="comment">% Sicherungskopien).</span>
+<span class="comment">%</span>
+<span class="comment">% Die Aufgabenstellung sowie Hinweise finden Sie im</span>
+<span class="comment">%    DBV-Blatt4_Binomialfilter_und_Punkttransformationen.pdf</span>
+
+<span class="comment">% ------------------------------------------------------------------------</span>
+</pre><h2>Initialisierung:<a name="2"></a></h2><pre class="codeinput">coder = <span class="string">'Cinepak'</span>;    <span class="comment">%'None', 'Cinepak', 'Indeo3'</span>
+addpath(<span class="string">'../Packages_Matlab'</span>);
+addpath(<span class="string">'../allg/'</span>);
+addpath(<span class="string">'../allg/Bilder'</span>);
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><h2>Bild einlesen:<a name="3"></a></h2><pre class="codeinput">g1 = imread( <span class="string">'Bilder/forest_gray_reduced.pgm'</span> );
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><h2>Histogramm:<a name="4"></a></h2><p>Erzeugen Sie das Histogramm des Bildes und stellen Sie es zusammen mit dem Bild dar:</p><pre class="codeinput">fig1 = figure(1); imshow( g1 );
+fig2 = figure(2); imhist(g1);
+
+saveas( fig2, <span class="string">'Ergebnisse/g1_histo.jpg'</span> );
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_01.png" alt=""> <img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_02.png" alt=""> <h2>Aufhellung:<a name="5"></a></h2><p>Hellen Sie das Bild g1 deutlich auf. Stellen Sie es wieder mit dem Histogramm dar.</p><pre class="codeinput">g2 = g1 + (255-max(max(g1)));
+
+figure(3); imshow( g2 );
+figure(4); imhist( g2 );
+
+imwrite( g2, <span class="string">'Ergebnisse/g2-aufgehellt.jpg'</span> );
+saveas( fig2, <span class="string">'Ergebnisse/g2-aufgehellt_histo.jpg'</span> );
+
+<span class="comment">% Frage: Was bedeutet die Aufhellung f&uuml;r das Histogramm des</span>
+<span class="comment">% aufgehellten Bildes?</span>
+<span class="comment">% A: Aufhellen bedeutet im Histogramm eine verschiebung</span>
+<span class="comment">% nach links. Die Verteilung bleibt dabei gleich, alle Grauwerte werden um</span>
+<span class="comment">% den gleichen Wert verschoben. Die Dynamik bleibt gleich.</span>
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_03.png" alt=""> <img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_04.png" alt=""> <h2>lineare Grauwertnormierung:<a name="6"></a></h2><p>Heben Sie den Kontrast des Bildes !optimal! durch eine lineare Kennlinie an:</p><pre class="codeinput">g3 = 255 / (max(max(g1)) - min(min(g1))) * (g1 - min(min(g1)));
+
+figure(5); imshow( g3 );
+figure(6); imhist( g3 );
+
+imwrite( g3, <span class="string">'Ergebnisse/g3-normiert.jpg'</span> );
+saveas( fig2, <span class="string">'Ergebnisse/g3-normiert_histo.jpg'</span> );
+
+<span class="comment">% optimal bedeutet hier das die Dynamik des Bildes maximiert wurde. Alle</span>
+<span class="comment">% Grauwerte sollen vom Ergebnisbild ausgenutzt werden.</span>
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_05.png" alt=""> <img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_06.png" alt=""> <h2>Histogrammequivalisierung bzw. -egalisierung:<a name="7"></a></h2><p>F&uuml;hren Sie eine Histogrammequivalisierung f&uuml;r das urspr&uuml;ngliche Bild g1 aus:</p><pre class="codeinput">g4 = histeq(g1);
+
+figure(7); imshow( g4 );
+figure(8); imhist( g4 );
+
+imwrite( g4, <span class="string">'Ergebnisse/g4-egalisiert.jpg'</span> );
+saveas( fig2, <span class="string">'Ergebnisse/g4-egalisiert_histo.jpg'</span> );
+
+<span class="comment">% Fragen:</span>
+<span class="comment">% 1) Was f&auml;llt Ihnen auf?</span>
+<span class="comment">% A: In den dunklen bereichen sind helle Punkte. Im Histogramm sieht man</span>
+<span class="comment">% das insgesammt weniger verschiedene Grauwerte vorhanden sind.</span>
+<span class="comment">%</span>
+<span class="comment">% 2) Nennen Sie Gr&uuml;nde f&uuml;r diese Auff&auml;lligkeiten</span>
+<span class="comment">% A: Die hellen Punkte in den dunklen Stellen resultieren aus der</span>
+<span class="comment">% Aufteilung in gleich gro&szlig;e Fl&auml;chen. Die dunklen Grauwerte, die</span>
+<span class="comment">% h&auml;ufiger vorhanden sind werden weiter auseinandergezogen.</span>
+<span class="comment">% Dadurch das viele helle Grauwerte selten vorkommen werden diese im</span>
+<span class="comment">% ergebnisbild zusammengefasst. Die hellen strukturen sind im Ergebnisbild</span>
+<span class="comment">% nicht mehr so deutlich zu erkennen.</span>
+<span class="comment">%</span>
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_07.png" alt=""> <img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_08.png" alt=""> <h2>Quantisierung:<a name="8"></a></h2><p>Bilden Sie die oberste (Bit 7) und die vierte (Bit 3) Bitebene des Bildes g3, f&uuml;r das Sie den Kontrast angehoben haben: Stellen Sie diese geeignet dar:</p><pre class="codeinput">g5a = bitand( g3, 2^7 );
+g5a(g5a &gt; 0) = 255;
+g5b = bitand( g3, 2^3 );
+g5b(g5b &gt; 0) = 255;
+
+figure(9); imshow( g5a );
+figure(10); imshow( g5b );
+
+imwrite( g5a, <span class="string">'Ergebnisse/g5a-obersteBitebene.jpg'</span> );
+imwrite( g5a, <span class="string">'Ergebnisse/g5a-vierteBitebene.jpg'</span> );
+
+<span class="comment">% Frage: Wieviele verschiedene Grauwerte enth&auml;lt g5a ?</span>
+<span class="comment">% A: Im Ergebnisbild sind alle Grauwerte die gr&ouml;&szlig;er gleich 128 sind mit</span>
+<span class="comment">% wei&szlig; dargestellt.</span>
+
+<span class="comment">% Bild mit vierter Bitebene zeigt alle Bildpunkte wei&szlig;, wo im Wert des</span>
+<span class="comment">% Grauweres im Ursprungsbild das vierte Bit gesetzt wurde. Deshalb sind</span>
+<span class="comment">% dort fast keine deutlichen Strukturen erkennbar.</span>
+
+<span class="comment">%--------------------------------------------------------------------------</span>
+</pre><img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_09.png" alt=""> <img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_10.png" alt=""> <h2>Grauwertschwelle:<a name="9"></a></h2><p>Frage: Durch welche Schwellwertbildung l&auml;&szlig;t sich die oberste Bitebene aus dem Quantisierungsbeispiel auch erzeugen? A: Das oberste Bit (Bit 7) hat den Wert 128. Man kann den Schwellwert also auf 128 setzen. Alles darunter wird schwarz, alles dar&uuml;ber wei&szlig; dargestellt.</p><p>Nehmen Sie die Schwellwertbildung am Bild g3 vor:</p><pre class="codeinput">g6 = g3;
+g6(g6&lt;128) = 0;
+g6(g6&gt;0) = 255;
+
+figure(11); imshow( g6 );
+</pre><img vspace="5" hspace="5" src="DBV_4b_Ex_Punkttransf_Histogramm_Gruppe_08_11.png" alt=""> <pre class="codeinput"><span class="string">'fertig'</span>
+</pre><pre class="codeoutput">
+ans =
+
+fertig
+
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.13<br></p></div><!--
+##### SOURCE BEGIN #####
+%
+% 4b. Praktikum - Punkttransformation + Histogramm
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% Legen Sie in Ihrem Arbeitsverzeichnis ein Unterverzeichnis an:
+%    4b.Punkttransf+Histogramm
+%
+% Kopieren Sie das Notebook aus ../allg dorthin und benennen Sie es um in
+%    4b.Punkttransf+Histogramm_Gruppe-XY.m
+% Legen Sie dort ein Unterverzeichnis 'Ergebnisse/' an.
+%
+% Führen Sie die Arbeitsschritte aus, an denen ??? als Platzhalter steht
+% und speichern Sie das Notebook am Ende ab (zwischendurch auch
+% Sicherungskopien).
+% 
+% Die Aufgabenstellung sowie Hinweise finden Sie im 
+%    DBV-Blatt4_Binomialfilter_und_Punkttransformationen.pdf
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Initialisierung:
+coder = 'Cinepak';    %'None', 'Cinepak', 'Indeo3'
+addpath('../Packages_Matlab');
+addpath('../allg/');
+addpath('../allg/Bilder');
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Bild einlesen:
+g1 = imread( 'Bilder/forest_gray_reduced.pgm' );
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Histogramm:
+% Erzeugen Sie das Histogramm des Bildes und stellen Sie es 
+% zusammen mit dem Bild dar:
+fig1 = figure(1); imshow( g1 );
+fig2 = figure(2); imhist(g1);
+
+saveas( fig2, 'Ergebnisse/g1_histo.jpg' );
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Aufhellung:
+% Hellen Sie das Bild g1 deutlich auf.
+% Stellen Sie es wieder mit dem Histogramm dar.
+
+g2 = g1 + (255-max(max(g1)));
+
+figure(3); imshow( g2 );
+figure(4); imhist( g2 );
+
+imwrite( g2, 'Ergebnisse/g2-aufgehellt.jpg' );
+saveas( fig2, 'Ergebnisse/g2-aufgehellt_histo.jpg' );
+
+% Frage: Was bedeutet die Aufhellung für das Histogramm des 
+% aufgehellten Bildes?
+% A: Aufhellen bedeutet im Histogramm eine verschiebung
+% nach links. Die Verteilung bleibt dabei gleich, alle Grauwerte werden um
+% den gleichen Wert verschoben. Die Dynamik bleibt gleich.
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% lineare Grauwertnormierung:
+% Heben Sie den Kontrast des Bildes !optimal! durch eine 
+% lineare Kennlinie an:
+
+g3 = 255 / (max(max(g1)) - min(min(g1))) * (g1 - min(min(g1)));
+
+figure(5); imshow( g3 );
+figure(6); imhist( g3 );
+
+imwrite( g3, 'Ergebnisse/g3-normiert.jpg' );
+saveas( fig2, 'Ergebnisse/g3-normiert_histo.jpg' );
+
+% optimal bedeutet hier das die Dynamik des Bildes maximiert wurde. Alle
+% Grauwerte sollen vom Ergebnisbild ausgenutzt werden.
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Histogrammequivalisierung bzw. -egalisierung:
+% Führen Sie eine Histogrammequivalisierung für das ursprüngliche 
+% Bild g1 aus:
+g4 = histeq(g1);
+
+figure(7); imshow( g4 );
+figure(8); imhist( g4 );
+
+imwrite( g4, 'Ergebnisse/g4-egalisiert.jpg' );
+saveas( fig2, 'Ergebnisse/g4-egalisiert_histo.jpg' );
+
+% Fragen: 
+% 1) Was fällt Ihnen auf?
+% A: In den dunklen bereichen sind helle Punkte. Im Histogramm sieht man
+% das insgesammt weniger verschiedene Grauwerte vorhanden sind. 
+%
+% 2) Nennen Sie Gründe für diese Auffälligkeiten
+% A: Die hellen Punkte in den dunklen Stellen resultieren aus der
+% Aufteilung in gleich große Flächen. Die dunklen Grauwerte, die 
+% häufiger vorhanden sind werden weiter auseinandergezogen.
+% Dadurch das viele helle Grauwerte selten vorkommen werden diese im
+% ergebnisbild zusammengefasst. Die hellen strukturen sind im Ergebnisbild
+% nicht mehr so deutlich zu erkennen.
+% 
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Quantisierung:
+% Bilden Sie die oberste (Bit 7) und die vierte (Bit 3) Bitebene 
+% des Bildes g3, für das Sie den Kontrast angehoben haben:
+% Stellen Sie diese geeignet dar:
+g5a = bitand( g3, 2^7 );
+g5a(g5a > 0) = 255;
+g5b = bitand( g3, 2^3 );
+g5b(g5b > 0) = 255;
+
+figure(9); imshow( g5a );
+figure(10); imshow( g5b );
+
+imwrite( g5a, 'Ergebnisse/g5a-obersteBitebene.jpg' );
+imwrite( g5a, 'Ergebnisse/g5a-vierteBitebene.jpg' );
+
+% Frage: Wieviele verschiedene Grauwerte enthält g5a ?
+% A: Im Ergebnisbild sind alle Grauwerte die größer gleich 128 sind mit
+% weiß dargestellt.
+
+% Bild mit vierter Bitebene zeigt alle Bildpunkte weiß, wo im Wert des
+% Grauweres im Ursprungsbild das vierte Bit gesetzt wurde. Deshalb sind
+% dort fast keine deutlichen Strukturen erkennbar. 
+
+%REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+%% Grauwertschwelle:
+% Frage: Durch welche Schwellwertbildung läßt sich die oberste Bitebene
+% aus dem Quantisierungsbeispiel auch erzeugen?
+% A: Das oberste Bit (Bit 7) hat den Wert 128.
+% Man kann den Schwellwert also auf 128 setzen. Alles darunter wird
+% schwarz, alles darüber weiß dargestellt.
+%
+% Nehmen Sie die Schwellwertbildung am Bild g3 vor:
+g6 = g3;
+g6(g6<128) = 0;
+g6(g6>0) = 255;
+
+figure(11); imshow( g6 );
+
+%% 
+'fertig'
+
+##### SOURCE END #####
+--></body></html>
