@@ -40,12 +40,15 @@ figure( 2 ), imshow( uint8( gdx + 127 ) );
 imwrite( uint8( gdx + 127 ), 'Ergebnisse/Tile-gray_dx.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie das Ergebnis bzgl. Kanten und Flächen:
-% A: Die weißen Kanten im Ergebnisbild entsprechen den Grauwertübergängen
-% von Dunkel nach Hell im Ausgangsbild (Fugen der Kacheln). An diesen
-% Kanten (im Ergebnisbild) ist die gerichtete Ableitung in x-Richtung gut
-% zu erkennen. Da die Flächen (die Kacheln selbst) im Ausgangsbild keine
-% nennenswerten Grauwertübergänge aufweisen sind diese im Ergebnisbild
-% durch mittlere Grauwerte dargestellt.
+
+% A: Die weißen bzw. schwarzen Kanten im Ergebnisbild entsprechen den
+% Grauwertübergängen von Dunkel nach Hell bzw. von Hell nach Dunkel im
+% Ausgangsbild (Fugen der Kacheln). An diesen Kanten ist im Ergebnisbild
+% die gerichtete Ableitung in x-Richtung besonders gut zu erkennen
+% (vertikale Fugen). Da die Flächen (die Kacheln selbst) im Ausgangsbild
+% keine nennenswerten Grauwertübergänge aufweisen (außer bei kleinen
+% Einschlüssen am unteren Bildrand) sind diese im Ergebnisbild durch
+% mittlere Grauwerte dargestellt.
 
 %--------------------------------------------------------------------------
 %% Richtungsableitung:
@@ -65,14 +68,17 @@ imwrite( uint8( gdn + 127 ), 'Ergebnisse/Tile-gray_dn.jpg', 'jpg' );
 
 % Frage: Beschreiben Sie den Unterschied im Ergebnis zur Ableitung 
 %        in x-Richtung:
-% A: Die schrägen Kanten der Fugen werden im zweiten Ergebnisbild
-% mit stark unterschiedlichen Grauwerten dargestellt.
+% A: Die schräg verlaufenden Fugen werden im zweiten Ergebnisbild teilweise
+% auch mit mittleren und nicht nur mit hohen oder niedirgen Grauwerten wie
+% bei der Ableitung in x-Richtung dargestellt.
 
 % Frage: Warum ist das so?
-% A: Die Fugen, die senkrecht zur Ableitungsrichtung stehen werden heller
-% dargestellt, da der Grauwertübergang an diesen Stellen sehr viel steiler
-% verläuft als an Fugen, die eher parallel zur Ableitungsrichtung
-% verlaufen.
+% A: Die Fugen, die senkrecht zur Ableitungsrichtung stehen werden mit
+% hohen bzw. niedrigen Grauwerten dargestellt (je nach Grauwertübergang).
+% Bei Fugen, die fast parallel zur Ableitungsrichtung verlaufen, treten
+% keine nennenswerten Grauwertübergänge auf. Diese Fugen werden im
+% Ergebnisbild ähnlich wie die Flächen mit einem mittleren Grauwert
+% dargestellt.
 
 %--------------------------------------------------------------------------
 %% Laplace mit Binomialfilter:
@@ -95,11 +101,13 @@ imwrite( uint8( gblap + 127 ), 'Ergebnisse/Tile-gray_binlaplace.jpg', 'jpg' );
 % geringer als bei der Ableitung in x-Richtung.
 
 % Frage: Warum ist das so?
-% A: Der Laplace-Operator ist rotationsinvariant, das bedeutet das die
-% Ableitung in alle Richtungen erfolgt. Dadurch besitzen die Kanten im
-% Ergebnisbild alle die selbe Intensität. Da der Laplace-Operator sowohl in
-% x- als auch y-Richtung zweimal ableitet, wird die Intensität der Kanten
-% geringer.
+
+% A: Der Laplace-Operator ist rotationsinvariant. Das bedeutet, dass die
+% Ableitungen in alle Richtungen erfolgen. Dadurch besitzen die Kanten im
+% Ergebnisbild alle den gleichen Grauwert. Da der Laplace-Operator sowohl
+% in x- als auch y-Richtung zweimal ableitet, wird die Intensität der
+% Kanten geringer und es entstehen pro Kante im Ausgangsbild zwei Übergänge
+% im Ergebnisbild (besonders gut bei den vertikalen Kanten zu erkennen).
 
 %--------------------------------------------------------------------------
 %% Frequenzgang von Binomialfiltern:
@@ -130,18 +138,18 @@ sizex = round( 1 / ( ( freqfacx * 0.5 * size( g,2 ) ) * dux ) )
 sizey = round( 1 / ( ( freqfacy * 0.5 * size( g,1 ) ) * duy ) )
 
 % Filterung des Bildes mit einem entsprechenden Binominalfilter
-h = Binomialfilter( [sizex,0,sizey,0], 1 );
-gsam = uint8( imfilter( double( g ), double( h ) ) );
-figure( 6 ), imshow( gsam );
+[h, nfactor] = Binomialfilter( [sizex,0,sizey,0], 0 );
+gsam = nfactor * imfilter( double( g ), double( h ) );
+figure( 6 ), imshow( uint8( gsam ) );
 
 % Berechnung des gefilterten Betragsspektrums
-fg = fftshift( fft2( gsam ) );
+fg = fftshift( fft2( uint8( gsam ) ) );
 afg = abs( fg );
 afg = afg / max( max ( afg ) ) * 255;
 figure( 7 ), imshow( afg );
 
 % Das Spektrum nach der Filterung hat bis auf die Stauchung in x- und
-% y-Richtung die gleiche Form (sieh Ausgangsbild). Auffällig sind
+% y-Richtung die gleiche Form (siehe Spektrum Ausgangsbild). Auffällig sind
 % allerdings die weißen Linien in x- und y-Richtung ausgehen vom Nullpunkt.
 
 %%
