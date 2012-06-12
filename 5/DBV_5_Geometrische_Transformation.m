@@ -45,7 +45,7 @@ figure(1); imshow( g )
 %   Rotationszentren aus.
 % - Speichern Sie repräsentative Ergebnisse mit beschreibendem Namen 
 %   in Ergebnisse/ ab.
-test = myrotate( g, 180 );
+test = myrotate( g, 27, [256,256], 'b' );
 figure, imshow( uint8( test ) );
 
 %--------------------------------------------------------------------------

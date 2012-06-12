@@ -28,7 +28,13 @@ for i = 1:ydim
         index = R \ [ i; j; 1];
         index = index + [ x( 1 ); x( 2 ); 1 ];
         if( index( 1 ) >= 1 && index( 1 ) <= xdim && index( 2 ) >= 1 && index( 2 ) <= ydim ) 
-            rotation( i, j ) = I( round( index( 1 ) ), round( index( 2 ) ) );
+            if(method == 'n')
+                rotation( i, j ) = I( round( index( 1 ) ), round( index( 2 ) ) );
+            else
+                xs = index(1) - floor(index(1));
+                ys = index(2) - floor(index(2));
+                rotation( i, j ) = I( floor( index(1)), floor( index(2) ) ) * (1 - xs) * (1 - ys) + I( ceil( index(1)), floor( index(2))) * xs * (1 - ys) + I( floor(index(1)), ceil(index(2))) * ys * (1 - xs) + I( ceil(index(1)), ceil(index(2))) * xs * ys;                   
+            end
         end
     end
 end
@@ -60,6 +66,10 @@ function [ I, alpha, x, method ] = check_param( varargin )
       alpha = varargin{ 2 };
       x = varargin{ 3 };
       method = varargin{ 4 };
+      if(method ~= 'b' && method ~= 'n')
+        disp('method muss n oder b sein.');
+      end
+      
     otherwise,
       disp( 'Fehler, ungültige Parameter!' )
     end
