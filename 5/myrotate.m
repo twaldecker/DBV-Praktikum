@@ -33,7 +33,7 @@ for i = 1:ydim
             else
                 xs = index(1) - floor(index(1));
                 ys = index(2) - floor(index(2));
-                rotation( i, j ) = I( floor( index(1)), floor( index(2) ) ) * (1 - xs) * (1 - ys) + I( ceil( index(1)), floor( index(2))) * xs * (1 - ys) + I( floor(index(1)), ceil(index(2))) * ys * (1 - xs) + I( ceil(index(1)), ceil(index(2))) * xs * ys;                   
+                rotation( i, j ) = I( floor( index(1)), floor( index(2) ) ) * (1 - xs) * (1 - ys) + I( ceil( index(1)), floor( index(2))) * xs * (1 - ys) + I( floor(index(1)), ceil(index(2))) * ys * (1 - xs) + I( ceil(index(1)), ceil(index(2))) * xs * ys;
             end
         end
     end
