@@ -14,28 +14,23 @@ if( x == 'd' )
     x = [ round( xdim/2 ), round( ydim/2 ) ];
 end
 
-% TODO: sinnvolle Berechnung der Ausgangsbilddimensionen
-xmaxdim = xdim;
-ymaxdim = ydim;
-
-% Initialisierung Ergebnisbild
-rotation = zeros( ymaxdim, xmaxdim );
+% Initialisierung Ergebnisbilder
+rotation = zeros( ydim, xdim );
 
 % Rotationsmatrix mit Winkel alpha und Zentrum x
 R = [ cos( ( alpha * 2*pi ) / 360 ), -sin( ( alpha * 2*pi ) / 360 ), x(1);
       sin( ( alpha * 2*pi ) / 360 ),  cos( ( alpha * 2*pi ) / 360 ), x(2);
                                   0,                              0, 1];
 
-% Translationsmatrix
-T = [ 1, 0, x(1);
-      0, 1, x(2);
-      0, 0,    1];
-  
-% Berechnung der Ausgangsbildwerte
-for i = 1:maxdia
-   for j = 1:maxdia
-
-   end
+% Berechnung der kombinierten Rotation/Translation
+for i = 1:ydim
+    for j = 1:xdim
+        index = R \ [ i; j; 1];
+        index = index + [ x( 1 ); x( 2 ); 1 ];
+        if( index( 1 ) >= 1 && index( 1 ) <= xdim && index( 2 ) >= 1 && index( 2 ) <= ydim ) 
+            rotation( i, j ) = I( round( index( 1 ) ), round( index( 2 ) ) );
+        end
+    end
 end
     
 end

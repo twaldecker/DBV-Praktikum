@@ -8,7 +8,7 @@
 %    5.Geometrische-Transformation_Gruppe-XY.m
 % Legen Sie dort ein Unterverzeichnis 'Ergebnisse/' an.
 %
-% F�hren Sie die Arbeitsschritte aus, an denen ??? als Platzhalter steht
+% Führen Sie die Arbeitsschritte aus, an denen ??? als Platzhalter steht
 % und speichern Sie das Notebook am Ende ab (zwischendurch auch
 % Sicherungskopien).
 % 
@@ -45,10 +45,8 @@ figure(1); imshow( g )
 %   Rotationszentren aus.
 % - Speichern Sie repräsentative Ergebnisse mit beschreibendem Namen 
 %   in Ergebnisse/ ab.
-
-rotate(g, 50, [200,200]);
-
-myrotate( g, 45 );
+test = myrotate( g, 180 );
+figure, imshow( uint8( test ) );
 
 %--------------------------------------------------------------------------
 %% Fragen:
