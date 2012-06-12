@@ -47,6 +47,8 @@ figure(1); imshow( g )
 %   in Ergebnisse/ ab.
 %???
 
+myrotate( g, 45 );
+
 %--------------------------------------------------------------------------
 %% Fragen:
 % Beschreiben Sie hier Aspekte, die Ihnen bei der Umsetzung oder der
