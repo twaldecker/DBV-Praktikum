@@ -48,6 +48,8 @@ figure(1); imshow( g )
 
 rotate(g, 50, [200,200]);
 
+myrotate( g, 45 );
+
 %--------------------------------------------------------------------------
 %% Fragen:
 % Beschreiben Sie hier Aspekte, die Ihnen bei der Umsetzung oder der
