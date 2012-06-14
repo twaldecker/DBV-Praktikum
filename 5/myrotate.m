@@ -1,8 +1,6 @@
 function [ rotation ] = myrotate( varargin )
-%ROTATE Summary of this function goes here
-%   Detailed explanation goes here
 
-% Parameter prüfen und ggf. setzen
+% Parameter prüfen und ggf. setzen (siehe Funktion unten)
 [ I, alpha, x, method ] = check_param( varargin{:} );
 
 % Berechnung der Eingangsbilddimensionen
@@ -14,7 +12,7 @@ if( x == 'd' )
     x = [ round( xdim/2 ), round( ydim/2 ) ];
 end
 
-% Initialisierung Ergebnisbilder
+% Initialisierung Ergebnisbild
 rotation = zeros( ydim, xdim );
 
 % Rotationsmatrix mit Winkel alpha und Zentrum x
@@ -23,11 +21,16 @@ R = [ cos( ( alpha * 2*pi ) / 360 ), -sin( ( alpha * 2*pi ) / 360 ), x(1);
                                   0,                              0, 1];
 
 % Berechnung der kombinierten Rotation/Translation
+% Iteration über alle Pixel des Ergebnisbilds
 for i = 1:ydim
     for j = 1:xdim
+        % Berechnung des Index im Ausgangsbild
         index = R \ [ i; j; 1];
+        % Korrektur des Index um das Rotationszentrum
         index = index + [ x( 1 ); x( 2 ); 1 ];
+        % Index kann über Bildgrenzen hinauslaufen -> Abfrage
         if( index( 1 ) >= 1 && index( 1 ) <= xdim && index( 2 ) >= 1 && index( 2 ) <= ydim ) 
+            % Berechnung der Grauwerte im Ausgangsbild mit der entsprechender Methode
             if(method == 'n')
                 rotation( i, j ) = I( round( index( 1 ) ), round( index( 2 ) ) );
             else
@@ -69,7 +72,6 @@ function [ I, alpha, x, method ] = check_param( varargin )
       if(method ~= 'b' && method ~= 'n')
         disp('method muss n oder b sein.');
       end
-      
     otherwise,
       disp( 'Fehler, ungültige Parameter!' )
     end
