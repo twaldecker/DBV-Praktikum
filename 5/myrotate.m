@@ -1,4 +1,14 @@
 function [ rotation ] = myrotate( varargin )
+%Rotate image
+%   MYROTATE(I, angle) rotates the image with angle.
+%     origin is in the middle of the image.
+%     interpolation_method is bilinear.
+%
+%   MYROTATE(I, angle, [X, Y]) specify [X, Y] as origin for the rotation
+%
+%   MYROTATE(I, angle, [X, Y], interpolation_method)
+%   interpolation_method: n - Nearest-Neighbor
+%                         b - Bilinear
 
 % Parameter prüfen und ggf. setzen (siehe Funktion unten)
 [ I, alpha, x, method ] = check_param( varargin{:} );

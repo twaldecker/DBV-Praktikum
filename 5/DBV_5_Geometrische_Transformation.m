@@ -101,12 +101,12 @@ imwrite( uint8( bilinear ), 'Ergebnisse/bilinear.jpg' );
 %    ermöglichen, muss die Rotation in jedem Fall mit einer Translation
 %    verbunden werden. Dies geschieht durch Multiplikation der beiden
 %    Transformationsmatrizen zu einer Kombinierten
-%    Rotation-/Translationmatrix. Diese kombinierte Matrix wurde in der
+%    Rotations-/Translationsmatrix. Diese kombinierte Matrix wurde in der
 %    myrotate-Funktion verwendet. Diese implizite Translation muss bei der
 %    Indizierung des Ausgangsbildes, zur Brechnung der interpolierten
 %    Grauwerte, berücksichtigt werden. Außerdem können bei der Verwendung
 %    der Transformationsmatrix die Indexgrenzen des Ausgangsbilds
-%    überschrittenwerden. Dieser Fehlerhafte Zugriff muss durch eine
+%    überschritten werden. Dieser fehlerhafte Zugriff muss durch eine
 %    Abfrage verhindert werden.
 
 %    Durch die Rotation des Bilds, werden im Ergebnis bestimmte Bildinhalte
