@@ -25,21 +25,27 @@ addpath('../allg/Bilder');
 %--------------------------------------------------------------------------
 %% Bild einlesen:
 g = im2single( imread('Geldstücke-klein.pgm' ) );
-fig1 = figure(1); imshow(g);
+fig1 = figure( 1 ); imshow( g );
 
 %--------------------------------------------------------------------------
 %% Kantendetektion:
 % Wenden Sie auf das Bild geeignete Operationen an, um Bereiche mit 
 % Kanten zu detektieren.
 % Speichern Sie das Ergebnis ab: 'Ergebnisse/Kantenbild.tif';
-%???
+
+% Canny-"Operator" liefert sehr gute Ergebnisse
+gk = edge( g, 'canny', 0.6, 2 );
+fig2 = figure( 2 ); imshow( gk );
+imwrite( gk, 'Ergebnisse/Kantenbild.tif' );
 
 %--------------------------------------------------------------------------
 %% Kantenmaske:
 % Bilden Sie daraus ein Binärbild, welches als Maske für die Kantenbereiche 
 % dient (für Kantenbildpunkte eine eins, sonst eine 0):
 % Speichern Sie das Ergebnis ab: 'Ergebnisse/Kantenmaske.tif;
-%???
+
+% Canny-Methode liefert bereits ein Binärbild !
+imwrite( gk, 'Ergebnisse/Kantenmaske.tif' );
 
 %--------------------------------------------------------------------------
 %% Parameterraum:
