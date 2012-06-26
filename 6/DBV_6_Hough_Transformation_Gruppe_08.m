@@ -34,6 +34,8 @@ fig1 = figure( 1 ); imshow( g );
 % Speichern Sie das Ergebnis ab: 'Ergebnisse/Kantenbild.tif';
 
 % Canny-"Operator" liefert sehr gute Ergebnisse
+% kurze Beschreibung Canny-Operator bzgl. der Vor- und Nachteile
+
 gk = edge( g, 'canny', 0.6, 2 );
 fig2 = figure( 2 ); imshow( gk );
 hold on;
@@ -57,7 +59,9 @@ imwrite( gk, 'Ergebnisse/Kantenmaske.tif' );
 % - die Objekte sind mindestens 25 Pixel von den Bildrändern entfernt
 % - die Kreisradien liegen im Intervall [10,20]
 
-A = zeros( [size( g ), 11] );
+% Intervall für Kreisradien wurde auf [10,25] vergrößert
+
+A = zeros( [size( g ), 16] );
 
 %--------------------------------------------------------------------------
 %% Berechnung Hough-Transformation:
@@ -71,26 +75,27 @@ A = zeros( [size( g ), 11] );
 ind = find( gk );
 % Für alle Pixel mit Wert 1
 for i = 1:size( ind )
+    % Berechne Koordinaten
     [y,x] = ind2sub( size( gk ), ind( i ) );
     % Für alle möglichen Mittelpunkte
-    for j = 1:3:size( g, 1 )
-        for k = 1:3:293 %size( g, 2 )
-            % Radien berechnen und ggf. speichern
+    for j = 1:3:size( A, 1 )
+        for k = 1:3:size( A, 2 )
+            % Radien berechnen und akkumulieren falls im Intervall
             r = round( norm( [y,x] - [j,k], 2 ) );
-            if( r >= 10 && r <= 20 )
+            if( r >= 10 && r <= 25 )
                 A(j,k,r-9) = A(j,k,r-9) + 1;
             end
         end
     end
 end
 
-
-
 %--------------------------------------------------------------------------
 %% Parameterraum auf erlaubten Bereich einschränken:
 % Schränken Sie nun den Parameterraum ein unter Nutzung obiger Vorkenntnisse.
 % (dieser Schritt kann zunächst auch übersprungen werden).
-%???
+
+A( 1:25, 1:25, : ) = 0;
+A( size( A, 1 ) - 25:end, size( A, 2 ) - 25:end, : ) = 0;
 
 %--------------------------------------------------------------------------
 %% Ermittlung geeigneter Kreiskandidaten:
@@ -99,13 +104,17 @@ end
 
 ind = find( A == max( A(:) ) );
 [y,x,r] = ind2sub( size( A ), ind( 1 ) );
+clear P;
 P( 1, : ) = [y,x,r+9];
 A( y, x, r ) = 0;
 for i = 1:8
     ind = find( A == max( A(:) ) );
     [y,x,r] = ind2sub( size( A ), ind( 1 ) );
     P = vertcat( P , [y,x,r+9] );
-    A( y, x, r ) = 0;
+    % Variante A Maxima werden streng lokal auf Null gesetzt
+    A( y, x, r+9 ) = 0;
+    % Variante B Maxima werden großflächig auf Null gesetzt
+    A( y-10:y+10, x-10:x+10, : ) = 0;
 end
 
 %--------------------------------------------------------------------------
@@ -135,7 +144,8 @@ end
 % A: ???
 
 % Ist sonst noch etwas aufgefallen?
-% A: ???
+% A: ovale nicht optimale Kreise, Maxima großflächig Nullen, Kugelschreiber als
+% Kreispunkte
 
 % Nennen Sie Maßnahmen zur Beschleunigung des Verfahrens:
 % A: ???
