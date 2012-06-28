@@ -33,12 +33,11 @@ fig1 = figure( 1 ); imshow( g );
 % Kanten zu detektieren.
 % Speichern Sie das Ergebnis ab: 'Ergebnisse/Kantenbild.tif';
 
-% Canny-"Operator" liefert sehr gute Ergebnisse
-% kurze Beschreibung Canny-Operator bzgl. der Vor- und Nachteile
+% Canny-"Operator" liefert sehr gute Ergebnisse bei
+% Kantendetektion/-bildung
 
 gk = edge( g, 'canny', 0.6, 2 );
 fig2 = figure( 2 ); imshow( gk );
-hold on;
 imwrite( gk, 'Ergebnisse/Kantenbild.tif' );
 
 %--------------------------------------------------------------------------
@@ -112,7 +111,7 @@ for i = 1:8
     [y,x,r] = ind2sub( size( A ), ind( 1 ) );
     P = vertcat( P , [y,x,r+9] );
     % Variante A Maxima werden streng lokal auf Null gesetzt
-    A( y, x, r+9 ) = 0;
+    % A( y, x, r+9 ) = 0;
     % Variante B Maxima werden großflächig auf Null gesetzt
     A( y-10:y+10, x-10:x+10, : ) = 0;
 end
@@ -122,34 +121,47 @@ end
 % Zeichnen Sie die Mittelpunkte und Kreise der gefundenen Objekte grün in
 % das Originalbild ein und speichern es ab: 'Ergebnisse/Hough-Kreise.tif';
 
+fig3 = figure( 3 ); imshow( g );
+hold on;
+
+% Quantisierung 360°
 phi = 0:0.05:2*pi;
 
 for i = 1:9
+    % Kreise zeichenen
     xk = ( P( i, 3 ) * cos( phi ) ) + P( i, 2 );
     yk = ( P( i, 3 ) * sin( phi ) ) + P( i, 1 );
     plot(xk,yk);
+    % Mittelpunkt zeichnen
+    plot( P( i, 2 ), P( i, 1 ), 'x' );
 end
 %--------------------------------------------------------------------------
 %% Fragen: 
 % Angenommen, alle Punkte einer Kante werden in der Kantenmaske erfaßt.
 % Werden große Kreise gegenüber kleinen bevorzugt gefunden (bzgl. der
 % Reihenfolge gefundener Maxima in der Hough-Transformierten)?
-% A: ???
+% A: Große Kreise werden nicht bevorzugt gefunden (siehe Maximasuche
+% Varainte A)
 
 % Warum ist das so bzw. warum nicht?
-% A: ???
+% A: Sobald die Bedingungen (hier die Kreisgleichung) im Rahmen des
+% Intervalls erfüllt ist, wird der Parameterraum entsprechend akkumuliert.
+% Dabei spielt der Berechnete Wert des Radius keine Rolle, da dieser nicht
+% gewichtet wird.
 
 % Wie könnte man die Bevorzugung großer Kreise vermeiden bzw.
 % wie könnte man große Kreise bevorzugt erkennen (Vorschlag)?
-% A: ???
+% A: Akkumulation des Parameterraums nicht mit konstantem Wert 1 sondern
+% mit dem Wert des berechneten Radium bzw. einem vielfachen davon.
 
 % Ist sonst noch etwas aufgefallen?
-% A: ovale nicht optimale Kreise, Maxima großflächig Nullen, Kugelschreiber als
-% Kreispunkte
+% A: - ovale nicht optimale Kreise werden nicht mehr erkannt
+%    - Maxima lokal Nullen -> manche Münzen werden mehrfach erkannt
+%                             andere gar nicht
+%    - Pixel des Kugelschreiber werden als Kreispunkte interpretiert
 
 % Nennen Sie Maßnahmen zur Beschleunigung des Verfahrens:
-% A: ???
+% A: Parallelisierung der Iteration über den Parameterraum.
 
 %% 
 'fertig'
-
