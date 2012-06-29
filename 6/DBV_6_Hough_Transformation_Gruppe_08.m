@@ -33,9 +33,8 @@ fig1 = figure( 1 ); imshow( g );
 % Kanten zu detektieren.
 % Speichern Sie das Ergebnis ab: 'Ergebnisse/Kantenbild.tif';
 
-% Canny-"Operator" liefert sehr gute Ergebnisse bei
+% Canny-"Operator" liefert sehr gute Ergebnisse bei der
 % Kantendetektion/-bildung
-
 gk = edge( g, 'canny', 0.6, 2 );
 fig2 = figure( 2 ); imshow( gk );
 imwrite( gk, 'Ergebnisse/Kantenbild.tif' );
@@ -46,7 +45,7 @@ imwrite( gk, 'Ergebnisse/Kantenbild.tif' );
 % dient (für Kantenbildpunkte eine eins, sonst eine 0):
 % Speichern Sie das Ergebnis ab: 'Ergebnisse/Kantenmaske.tif;
 
-% Canny-Methode liefert bereits ein Binärbild !
+% Canny-"Operator" liefert bereits ein Binärbild
 imwrite( gk, 'Ergebnisse/Kantenmaske.tif' );
 
 %--------------------------------------------------------------------------
@@ -59,7 +58,6 @@ imwrite( gk, 'Ergebnisse/Kantenmaske.tif' );
 % - die Kreisradien liegen im Intervall [10,20]
 
 % Intervall für Kreisradien wurde auf [10,25] vergrößert
-
 A = zeros( [size( g ), 16] );
 
 %--------------------------------------------------------------------------
@@ -74,9 +72,9 @@ A = zeros( [size( g ), 16] );
 ind = find( gk );
 % Für alle Pixel mit Wert 1
 for i = 1:size( ind )
-    % Berechne Koordinaten
+    % Berechne Pixelkoordinaten
     [y,x] = ind2sub( size( gk ), ind( i ) );
-    % Für alle möglichen Mittelpunkte
+    % Für alle möglichen Kreismittelpunkte
     for j = 1:3:size( A, 1 )
         for k = 1:3:size( A, 2 )
             % Radien berechnen und akkumulieren falls im Intervall
@@ -93,6 +91,7 @@ end
 % Schränken Sie nun den Parameterraum ein unter Nutzung obiger Vorkenntnisse.
 % (dieser Schritt kann zunächst auch übersprungen werden).
 
+% Bildränder werden nicht beachtet
 A( 1:25, 1:25, : ) = 0;
 A( size( A, 1 ) - 25:end, size( A, 2 ) - 25:end, : ) = 0;
 
@@ -101,6 +100,7 @@ A( size( A, 1 ) - 25:end, size( A, 2 ) - 25:end, : ) = 0;
 % - suchen Sie nun in der Hough-Transformierten die ersten 9 Maxima,
 % - merken sich die entsprechenden Parameterwerte
 
+% Matrix P enthält Koordinaten der Kreismittelpunkte und Kreisradien
 ind = find( A == max( A(:) ) );
 [y,x,r] = ind2sub( size( A ), ind( 1 ) );
 clear P;
@@ -131,10 +131,13 @@ for i = 1:9
     % Kreise zeichenen
     xk = ( P( i, 3 ) * cos( phi ) ) + P( i, 2 );
     yk = ( P( i, 3 ) * sin( phi ) ) + P( i, 1 );
-    plot(xk,yk);
+    plot( xk, yk, 'g' );
     % Mittelpunkt zeichnen
-    plot( P( i, 2 ), P( i, 1 ), 'x' );
+    plot( P( i, 2 ), P( i, 1 ), 'gx' );
 end
+
+saveas( fig3, 'Ergebnisse/Hough-Kreise.tif' );
+
 %--------------------------------------------------------------------------
 %% Fragen: 
 % Angenommen, alle Punkte einer Kante werden in der Kantenmaske erfaßt.
@@ -152,16 +155,20 @@ end
 % Wie könnte man die Bevorzugung großer Kreise vermeiden bzw.
 % wie könnte man große Kreise bevorzugt erkennen (Vorschlag)?
 % A: Akkumulation des Parameterraums nicht mit konstantem Wert 1 sondern
-% mit dem Wert des berechneten Radium bzw. einem vielfachen davon.
+% mit dem Wert des berechneten Radius bzw. einem vielfachen davon.
 
 % Ist sonst noch etwas aufgefallen?
 % A: - ovale nicht optimale Kreise werden nicht mehr erkannt
-%    - Maxima lokal Nullen -> manche Münzen werden mehrfach erkannt
+%    - Maxima lokal Nullen -> manche Münzen werden mehrfach erkannt,
 %                             andere gar nicht
 %    - Pixel des Kugelschreiber werden als Kreispunkte interpretiert
+%    - Schatten werden bei der Kantenbildung als Objektrand interpretiert
 
 % Nennen Sie Maßnahmen zur Beschleunigung des Verfahrens:
-% A: Parallelisierung der Iteration über den Parameterraum.
+% A: - Parallelisierung der Iteration über den Parameterraum
+%    - For-Schleifen in MATLAB durch Matrizenopteration ersetzten
+%    - Parameterraum weiter einschränken
+%    - "coarse-to-fine" Strategie mittels Laplace-/Gausspyramiden
 
 %% 
 'fertig'
