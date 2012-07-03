@@ -143,19 +143,19 @@ saveas( fig3, 'Ergebnisse/Hough-Kreise.tif' );
 % Angenommen, alle Punkte einer Kante werden in der Kantenmaske erfaßt.
 % Werden große Kreise gegenüber kleinen bevorzugt gefunden (bzgl. der
 % Reihenfolge gefundener Maxima in der Hough-Transformierten)?
-% A: Große Kreise werden nicht bevorzugt gefunden (siehe Maximasuche
-% Varainte A)
+% A: Für den Fall, dass alle Punkte einer Kante erfasst werden, werden
+% große Kreise bzgl. der Maxima in der Hough-Transformation bevorzugt.
 
 % Warum ist das so bzw. warum nicht?
-% A: Sobald die Bedingungen (hier die Kreisgleichung) im Rahmen des
-% Intervalls erfüllt ist, wird der Parameterraum entsprechend akkumuliert.
-% Dabei spielt der Berechnete Wert des Radius keine Rolle, da dieser nicht
-% gewichtet wird.
+% A: Da die Kanten größerer Kreise aus einer größeren Anzahl von Pixel
+% bestehen, steigt mit zunehmendem Radius auch die Anzahl der
+% Akkumulierungen im Parameterraum. Das Ergebnis sind größere lokale Maxima
+% an Stellen mit größeren Radien im Parameterraum.
 
 % Wie könnte man die Bevorzugung großer Kreise vermeiden bzw.
 % wie könnte man große Kreise bevorzugt erkennen (Vorschlag)?
 % A: Akkumulation des Parameterraums nicht mit konstantem Wert 1 sondern
-% mit dem Wert des berechneten Radius bzw. einem vielfachen davon.
+% 1 / (Radius * f).
 
 % Ist sonst noch etwas aufgefallen?
 % A: - ovale nicht optimale Kreise werden nicht mehr erkannt
